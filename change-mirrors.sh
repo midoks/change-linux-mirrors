@@ -35,6 +35,7 @@ function PermissionJudgment() {
 
 function RunMain(){
 	PermissionJudgment
+	
 }
 
 # 执行
