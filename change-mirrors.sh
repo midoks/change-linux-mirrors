@@ -17,6 +17,29 @@ WARN='[\033[33mWARN\033[0m]'
 ERROR='[\033[31mERROR\033[0m]'
 WORKING='[\033[34m*\033[0m]'
 
+## 定义系统判定变量
+DebianRelease="lsb_release"
+ARCH=$(uname -m)
+SYSTEM_DEBIAN="Debian"
+SYSTEM_UBUNTU="Ubuntu"
+SYSTEM_KALI="Kali"
+SYSTEM_REDHAT="RedHat"
+SYSTEM_RHEL="RedHat"
+SYSTEM_CENTOS="CentOS"
+SYSTEM_FEDORA="Fedora"
+
+## 定义目录和文件
+LinuxRelease=/etc/os-release
+RedHatRelease=/etc/redhat-release
+DebianVersion=/etc/debian_version
+DebianSourceList=/etc/apt/sources.list
+DebianSourceListBackup=/etc/apt/sources.list.bak
+DebianExtendListDir=/etc/apt/sources.list.d
+DebianExtendListDirBackup=/etc/apt/sources.list.d.bak
+RedHatReposDir=/etc/yum.repos.d
+RedHatReposDirBackup=/etc/yum.repos.d.bak
+SelinuxConfig=/etc/selinux/config
+
 function AuthorMessage() {
     echo -e "\n${GREEN} ------------ 脚本执行结束 ------------ ${PLAIN}\n"
     echo -e " \033[1;34m官方网站\033[0m https://github.com/midoks/change-linux-mirrors\n"
@@ -35,7 +58,7 @@ function PermissionJudgment() {
 
 function RunMain(){
 	PermissionJudgment
-	
+
 }
 
 # 执行
