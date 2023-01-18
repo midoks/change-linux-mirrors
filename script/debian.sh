@@ -112,6 +112,9 @@ function AutoSizeStr(){
 	NAME_STR_LEN=${#NAME_STR}
 	NAME_NUM_LEN=${#NAME_NUM}
 
+	echo "NAME_STR_LEN:$NAME_STR_LEN"
+	echo "NAME_NUM_LEN:$NAME_NUM_LEN"
+
 	fix_len=20
 	remaining_len=`expr $fix_len - $NAME_STR_LEN - $NAME_NUM_LEN`
 	echo "remaining_len:$remaining_len"
