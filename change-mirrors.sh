@@ -142,9 +142,39 @@ function EnvJudgment() {
     echo $SYNC_TXT
 }
 
+## 选择官方源
+function ChooseMirrors() {
+    clear
+    echo -e '+---------------------------------------------------+'
+    echo -e '|                                                   |'
+    echo -e '|   =============================================   |'
+    echo -e '|                                                   |'
+    echo -e '|       欢迎使用 Linux 一键更换系统软件源脚本.          |'
+    echo -e '|                                                   |'
+    echo -e '|   =============================================   |'
+    echo -e '|                                                   |'
+    echo -e '+---------------------------------------------------+'
+    echo -e ''
+    echo -e '#####################################################'
+    echo -e ''
+    echo -e '            提供以下软件源可供选择：'
+    echo -e ''
+    echo -e '#####################################################'
+    echo -e ''
+    echo -e ' ❖   Debian官方              1)'
+    echo -e ''
+    echo -e '#####################################################'
+    echo -e ''
+    echo -e "        运行环境  ${BLUE}${SYSTEM_NAME} ${SYSTEM_VERSION_NUMBER} ${SYSTEM_ARCH}${PLAIN}"
+    echo -e "        系统时间  ${BLUE}$(date "+%Y-%m-%d %H:%M:%S")${PLAIN}"
+    echo -e ''
+    echo -e '#####################################################'
+    CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件源 [ 1-13 ]：${PLAIN}")
+}
 function RunMain(){
 	PermissionJudgment
     EnvJudgment
+    ChooseMirrors
 
 }
 
