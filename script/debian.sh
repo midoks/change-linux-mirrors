@@ -23,6 +23,15 @@ SYSTEM_NAME=debian
 SYSTEM_VERSION_NUMBER=$(cat /etc/os-release | grep -E "VERSION_ID=" | awk -F '=' '{print$2}' | sed "s/[\'\"]//g")
 
 
+SOURCE_LIST[0]=deb.debian.org
+SOURCE_LIST[1]=deb.debian.org
+SOURCE_LIST[2]=mirrors.linode.com
+SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
+
+SOURCE_LIST_LANG[0]=Debian官方
+SOURCE_LIST_LANG[1]=Debian官方
+SOURCE_LIST_LANG[2]=LINODE
+
 ## 系统判定变量
 function EnvJudgment() {
     ## 判定系统处理器架构
@@ -88,6 +97,11 @@ function ChooseMirrors() {
     echo -e ''
     echo -e '#####################################################'
     echo -e ''
+    for V in ${SOURCE_LIST[@]}; do
+    i=0	
+	echo -e " ❖   ${V}              ${i})"
+	i=`expr $i + 1`
+	done
     echo -e ' ❖   Debian官方              1)'
     echo -e ''
     echo -e '#####################################################'
@@ -96,7 +110,7 @@ function ChooseMirrors() {
     echo -e "        系统时间  ${BLUE}$(date "+%Y-%m-%d %H:%M:%S")${PLAIN}"
     echo -e ''
     echo -e '#####################################################'
-    CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件源 [ 1-13 ]：${PLAIN}")
+    CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件源 [ 1-${SOURCE_LIST_LEN} ]：${PLAIN}")
 
     read -p "${CHOICE_A}" INPUT
     case $INPUT in
