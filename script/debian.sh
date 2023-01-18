@@ -41,7 +41,7 @@ SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 declare -A SOURCE_LIST
 
 SOURCE_LIST["a_Debian官方"]="deb.debian.org"
-SOURCE_LIST["a_Debian官方[中国]"]="deb.debian.org"
+SOURCE_LIST["a_Debian官方[中国]"]="ftp.cn.debian.org"
 SOURCE_LIST["a_LINODE"]="mirrors.linode.com"
 SOURCE_LIST["b_阿里云"]="mirrors.aliyun.com"
 SOURCE_LIST["b_阿里云[内网]"]="mirrors.cloud.aliyuncs.com"
