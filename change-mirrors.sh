@@ -55,7 +55,6 @@ function PermissionJudgment() {
 }
 
 
-
 function RunMain(){
 	PermissionJudgment
 
