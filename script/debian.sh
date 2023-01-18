@@ -126,7 +126,7 @@ function AutoSizeStr(){
 	NAME_STR_LEN=`echo "$NAME_STR" | wc -L`
 	NAME_NUM_LEN=`echo "$NAME_NUM" | wc -L`
 
-	fix_len=30
+	fix_len=35
 	remaining_len=`expr $fix_len - $NAME_STR_LEN - $NAME_NUM_LEN`
 	FIX_SPACE=' '
 	for ((ass_i=1;ass_i<=$remaining_len;ass_i++))
