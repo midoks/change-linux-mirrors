@@ -112,7 +112,14 @@ function AutoSizeStr(){
 	NAME_STR_LEN=${#NAME_STR}
 	NAME_NUM_LEN=${#NAME_NUM}
 
-	echo -e " ❖   $1              $2)"
+	fix_len=45
+	remaining_len=`expr $fix_len - $NAME_STR_LEN - $NAME_NUM_LEN`
+
+	$FIX_SPACE=' '
+	for ((i=1;i<=$remaining_len;i++)); do $FIX_SPACE="$FIX_SPACE "; done
+
+
+	echo -e " ❖   ${NAME_STR}${FIX_SPACE}${NAME_NUM})"
 }
 
 ## 选择官方源
