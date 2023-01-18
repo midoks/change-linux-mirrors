@@ -200,10 +200,10 @@ function ChooseMirrors() {
 	fi
 
     INPUT=`expr $INPUT - 1`
-    INPUT_KEY=${SOURCE_LIST[$INPUT]}
+    INPUT_KEY=${SOURCE_LIST_KEY[$INPUT]}
     SOURCE=${SOURCE_LIST[$INPUT_KEY]}
 
-	echo -e "\n将使用 ${BLUE}${SOURCE_LIST[$INPUT]}${PLAIN} 作为源！"    
+	echo -e "\n将使用 ${BLUE}${SOURCE_LIST_KEY[$INPUT]}${PLAIN} 作为源！"    
 
     ## 选择同步软件源所使用的 WEB 协议（ HTTP：80 端口，HTTPS：443 端口）
     if [[ ${NOT_SUPPORT_HTTPS} == "True" ]]; then
