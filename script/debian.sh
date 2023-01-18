@@ -183,7 +183,7 @@ function ChooseMirrors() {
     echo -e '#####################################################'
     echo -e ''
     cm_i=0
-    for V in ${!SOURCE_LIST[*]}; do
+    for V in ${!SOURCE_LIST[@]}; do
     num=`expr $cm_i + 1`
 	# echo -e " ❖   ${SOURCE_LIST_LANG[$cm_i]}              $num)"
 	AutoSizeStr "$V" "$num"
