@@ -40,9 +40,8 @@ SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 
 declare -A SOURCE_LIST
 
-SOURCE_LIST["Debian官方"]="deb.debian.org"
-SOURCE_LIST["Debian官方[中国]"]="deb.debian.org"
-SOURCE_LIST["LINODE"]="mirrors.linode.com"
+
+
 SOURCE_LIST["阿里云"]="mirrors.aliyun.com"
 SOURCE_LIST["阿里云[内网]"]="mirrors.cloud.aliyuncs.com"
 SOURCE_LIST["腾讯云"]="mirrors.tencent.com"
@@ -53,7 +52,9 @@ SOURCE_LIST["网易"]="mirrors.163.com"
 SOURCE_LIST["搜狐"]="mirrors.sohu.com"
 SOURCE_LIST["清华大学"]="mirrors.tuna.tsinghua.edu.cn"
 SOURCE_LIST["中国科学技术大学"]="mirrors.ustc.edu.cn"
-
+SOURCE_LIST["Debian官方[中国]"]="deb.debian.org"
+SOURCE_LIST["LINODE"]="mirrors.linode.com"
+SOURCE_LIST["Debian官方"]="deb.debian.org"
 # SOURCE_LIST[0]=deb.debian.org
 # SOURCE_LIST[1]=deb.debian.org
 # SOURCE_LIST[2]=mirrors.linode.com
