@@ -67,6 +67,31 @@ function EnvJudgment() {
     fi
 
     echo $SYSTEM_FACTIONS
+    ## 判定系统名称、版本、版本号
+    case ${SYSTEM_FACTIONS} in
+    Debian)
+        if [ ! -x /usr/bin/lsb_release ]; then
+            apt-get install -y lsb-release
+            if [ $? -eq 0 ]; then
+                clear
+            else
+                echo -e "\n$ERROR lsb-release 软件包安装失败"
+                echo -e "\n本脚本需要通过 lsb_release 指令判断系统类型，当前可能为精简安装的系统一般系统自带，请自行安装后重新执行脚本！\n"
+                exit
+            fi
+        fi
+        SYSTEM_JUDGMENT=$(${DebianRelease} -is)
+        SYSTEM_VERSION=$(${DebianRelease} -cs)
+        ;;
+    RedHat)
+        SYSTEM_JUDGMENT=$(cat $RedHatRelease | sed 's/ //g' | cut -c1-6)
+        if [[ ${SYSTEM_JUDGMENT} = ${SYSTEM_CENTOS} || ${SYSTEM_JUDGMENT} = ${SYSTEM_RHEL} ]]; then
+            CENTOS_VERSION=$(echo ${SYSTEM_VERSION_NUMBER} | cut -c1)
+        else
+            CENTOS_VERSION=""
+        fi
+        ;;
+    esac
 }
 
 function RunMain(){
