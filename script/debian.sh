@@ -115,10 +115,10 @@ function AutoSizeStr(){
 	fix_len=45
 	remaining_len=`expr $fix_len - $NAME_STR_LEN - $NAME_NUM_LEN`
 
-	$FIX_SPACE=' '
+	FIX_SPACE=' '
 	for ((i=1;i<=$remaining_len;i++))
 	do 
-		$FIX_SPACE="$FIX_SPACE "
+		FIX_SPACE="$FIX_SPACE "
 	done
 
 
