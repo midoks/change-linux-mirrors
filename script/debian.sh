@@ -32,8 +32,6 @@ SYSTEM_JUDGMENT=$(${DebianRelease} -is)
 SYSTEM_VERSION=$(${DebianRelease} -cs)
 SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 
-echo "SOURCE_BRANCH:${SOURCE_BRANCH}"
-
 
 SOURCE_LIST[0]=deb.debian.org
 SOURCE_LIST[1]=mirrors.linode.com
@@ -223,6 +221,8 @@ function RunMain(){
 	EnvJudgment
 	ChooseMirrors
 	BackupMirrors
+
+	echo "SOURCE_BRANCH:${SOURCE_BRANCH}"
 }
 
 # 执行
