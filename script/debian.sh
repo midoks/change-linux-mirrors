@@ -5,6 +5,8 @@
 ## License: Apache License
 ## Github: https://github.com/midoks/change-linux-mirrors
 
+export LANG=zh_CN.utf-8
+
 ARCH=$(uname -m)
 
 RED='\033[31m'
@@ -42,7 +44,7 @@ SOURCE_LIST[1]=mirrors.linode.com
 
 SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
 
-SOURCE_LIST_LANG[0]="Debian"
+SOURCE_LIST_LANG[0]="Debian官方"
 SOURCE_LIST_LANG[1]="LINODE"
 
 
