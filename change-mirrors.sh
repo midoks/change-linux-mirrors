@@ -249,6 +249,11 @@ function DownloadScript(){
     cd /tmp && unzip /tmp/dev.zip
 }
 
+function RemoveScript(){
+    cd /tmp && rm -rf /tmp/dev.zip
+    cd /tmp && rm -rf /tmp/change-linux-mirrors-main
+}
+
 # 安装
 function InstallScript(){
 
@@ -287,7 +292,7 @@ function InstallScript(){
     else
         OSNAME='unknow'
     fi
-    
+
     bash /tmp/change-linux-mirrors-main/script/${OSNAME}.sh
 }
 
@@ -296,6 +301,7 @@ function RunMain(){
 	PermissionJudgment
     DownloadScript
     InstallScript
+    RemoveScript
     AuthorSignature
 }
 
