@@ -141,7 +141,7 @@ function ChooseMirrors() {
     echo "INPUT1:${INPUT}"
     expr $INPUT "+" 10 &> /dev/null
     echo "err:$?"
-	if [ $? -ne 0 ];then
+	if [ "$?" -ne "0" ];then
 		INPUT=1
 		echo "INPUT2:${INPUT}"
 		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}Debian官方${PLAIN} 作为源！"
