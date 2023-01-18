@@ -97,9 +97,9 @@ function ChooseMirrors() {
     echo -e ''
     echo -e '#####################################################'
     echo -e ''
-    for V in ${SOURCE_LIST[@]}; do
     i=0	
-	echo -e " ❖   ${V}              ${i})"
+    for V in ${SOURCE_LIST[@]}; do
+	echo -e " ❖   ${V}              $SOURCE_LIST_LANG{$i})"
 	i=`expr $i + 1`
 	done
     echo -e ' ❖   Debian官方              1)'
