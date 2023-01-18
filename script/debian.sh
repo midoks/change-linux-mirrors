@@ -39,14 +39,23 @@ SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 
 SOURCE_LIST[0]=deb.debian.org
 SOURCE_LIST[1]=mirrors.linode.com
-
-SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
+SOURCE_LIST[2]=mirrors.aliyun.com
+SOURCE_LIST[3]=mirrors.cloud.aliyuncs.com
+SOURCE_LIST[4]=mirrors.tencent.com
+SOURCE_LIST[5]=mirrors.tencentyun.com
+SOURCE_LIST[6]=repo.huaweicloud.com
+SOURCE_LIST[7]=mirrors.myhuaweicloud.com
 
 SOURCE_LIST_LANG[0]="Debian官方"
 SOURCE_LIST_LANG[1]="LINODE"
+SOURCE_LIST_LANG[2]="阿里云"
+SOURCE_LIST_LANG[3]="阿里云[内网]"
+SOURCE_LIST_LANG[4]="腾讯云"
+SOURCE_LIST_LANG[5]="腾讯云[内网]"
+SOURCE_LIST_LANG[6]="华为云"
+SOURCE_LIST_LANG[7]="华为云[内网]"
 
-
-
+SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
 
 
 ## 系统判定变量
