@@ -187,7 +187,7 @@ function ChooseMirrors() {
     for V in ${SOURCE_LIST[@]}; do
     num=`expr $cm_i + 1`
 	# echo -e " ❖   ${SOURCE_LIST_LANG[$cm_i]}              $num)"
-	AutoSizeStr "${SOURCE_LIST_LANG[$cm_i]}" "$num"
+	AutoSizeStr "$V" "$num"
 	cm_i=`expr $cm_i + 1`
 	done
     # echo -e ' ❖   Debian官方              1)'
