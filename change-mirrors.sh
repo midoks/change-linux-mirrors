@@ -256,7 +256,6 @@ function RemoveScript(){
 
 # 安装
 function InstallScript(){
-
     _os=`uname`
     echo "use system: ${_os}"
     if [ ${_os} == "Darwin" ]; then
