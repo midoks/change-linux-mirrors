@@ -172,6 +172,16 @@ function ChooseMirrors() {
     CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件源 [ 1-13 ]：${PLAIN}")
 
     read -p "${CHOICE_A}" INPUT
+    case $INPUT in
+    1)
+        SOURCE="deb.debian.org"
+        ;;
+    *)
+        SOURCE="deb.debian.org"
+        echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}官方${PLAIN} 作为源！"
+        sleep 2s
+        ;;
+    esac
 }
 function RunMain(){
 	PermissionJudgment
