@@ -19,8 +19,20 @@ WARN='[\033[33mWARN\033[0m]'
 ERROR='[\033[31mERROR\033[0m]'
 WORKING='[\033[34m*\033[0m]'
 
+DebianVersion=/etc/debian_version
+DebianSourceList=/etc/apt/sources.list
+DebianSourceListBackup=/etc/apt/sources.list.bak
+DebianExtendListDir=/etc/apt/sources.list.d
+DebianExtendListDirBackup=/etc/apt/sources.list.d.bak
+
 SYSTEM_NAME=debian
 SYSTEM_VERSION_NUMBER=$(cat /etc/os-release | grep -E "VERSION_ID=" | awk -F '=' '{print$2}' | sed "s/[\'\"]//g")
+DebianRelease="lsb_release"
+SYSTEM_JUDGMENT=$(${DebianRelease} -is)
+SYSTEM_VERSION=$(${DebianRelease} -cs)
+SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
+
+echo "SOURCE_BRANCH:${SOURCE_BRANCH}"
 
 
 SOURCE_LIST[0]=deb.debian.org
@@ -112,6 +124,9 @@ function ChooseMirrors() {
     CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件源 [ 1-${SOURCE_LIST_LEN} ]：${PLAIN}")
 
     read -p "${CHOICE_A}" INPUT
+    INPUT=`expr $INPUT - 1`
+    echo $INPUT
+    echo ${SOURCE_LIST_LANG[$INPUT]}
     case $INPUT in
     1)
         SOURCE="deb.debian.org"
@@ -165,9 +180,49 @@ function ChooseMirrors() {
     echo "${SYSTEM_JUDGMENT} = ${SYSTEM_CENTOS} -o ${SYSTEM_JUDGMENT} = ${SYSTEM_RHEL}"
 }
 
+function BackupMirrors(){
+	echo "BackupMirrors"
+}
+
+## 更换基于 Debian 系 Linux 发行版的国内源
+function DebianMirrors() {
+    ## 修改国内源
+    case ${SYSTEM_JUDGMENT} in
+    Ubuntu)
+        echo "## 默认禁用源码镜像以提高速度，如需启用请自行取消注释
+deb ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION} main restricted universe multiverse
+# deb-src ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION} main restricted universe multiverse
+deb ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-security main restricted universe multiverse
+# deb-src ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-security main restricted universe multiverse
+deb ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-updates main restricted universe multiverse
+# deb-src ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-updates main restricted universe multiverse
+deb ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-backports main restricted universe multiverse
+# deb-src ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-backports main restricted universe multiverse
+
+## 预发布软件源（不建议启用）
+# deb ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-proposed main restricted universe multiverse
+# deb-src ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-proposed main restricted universe multiverse" >>$DebianSourceList
+        ;;
+    Debian)
+        echo "## 默认禁用源码镜像以提高速度，如需启用请自行取消注释
+deb ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION} main contrib non-free
+# deb-src ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION} main contrib non-free
+deb ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-updates main contrib non-free
+# deb-src ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-updates main contrib non-free
+deb ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-backports main contrib non-free
+# deb-src ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-backports main contrib non-free
+        
+## 预发布软件源（不建议启用）
+# deb ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH}-security ${SYSTEM_VERSION}/updates main contrib non-free
+# deb-src ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH}-security ${SYSTEM_VERSION}/updates main contrib non-free" >>$DebianSourceList
+        ;;
+    esac
+}
+
 function RunMain(){
 	EnvJudgment
 	ChooseMirrors
+	BackupMirrors
 }
 
 # 执行
