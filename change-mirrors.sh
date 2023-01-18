@@ -202,6 +202,27 @@ function ChooseMirrors() {
         ;;
     esac
 
+       ## 选择同步软件源所使用的 WEB 协议（ HTTP：80 端口，HTTPS：443 端口）
+    if [[ ${NOT_SUPPORT_HTTPS} == "True" ]]; then
+        WEB_PROTOCOL="http"
+    else
+        CHOICE_E=$(echo -e "\n${BOLD}└─ 软件源是否使用 HTTP 协议? [Y/n] ${PLAIN}")
+        read -p "${CHOICE_E}" INPUT
+        [ -z ${INPUT} ] && INPUT=Y
+        case $INPUT in
+        [Yy] | [Yy][Ee][Ss])
+            WEB_PROTOCOL="http"
+            ;;
+        [Nn] | [Nn][Oo])
+            WEB_PROTOCOL="https"
+            ;;
+        *)
+            echo -e "\n$WARN 输入错误，默认使用 HTTPS 协议！"
+            WEB_PROTOCOL="https"
+            ;;
+        esac
+    fi
+
     echo "${SYSTEM_JUDGMENT} = ${SYSTEM_CENTOS} -o ${SYSTEM_JUDGMENT} = ${SYSTEM_RHEL}"
 }
 
