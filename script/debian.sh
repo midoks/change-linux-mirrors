@@ -393,9 +393,6 @@ function RunMain(){
 	RemoveOldMirrorsFiles
     ChangeMirrors
     UpgradeSoftware
-
-	# echo "SYSTEM_JUDGMENT:${SYSTEM_JUDGMENT}"
-	# echo "SOURCE_BRANCH:${SOURCE_BRANCH}"
 }
 
 # 执行
