@@ -181,7 +181,7 @@ function ChooseMirrors() {
 	if [ "$?" -ne "0" ];then
 		INPUT=1
 		TMP_INPUT=`expr $INPUT - 1`
-		INPUT_KEY=${SOURCE_LIST_KEY[$INPUT]}
+		INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
 		echo -e "\n$WARN 输入非数字错误，将默认使用 ${BLUE}${INPUT_KEY:2}${PLAIN} 作为源！"
         sleep 2s
 	fi
@@ -189,7 +189,7 @@ function ChooseMirrors() {
 	if [ "$INPUT" -lt "0" ];then
 		INPUT=1
 		TMP_INPUT=`expr $INPUT - 1`
-		INPUT_KEY=${SOURCE_LIST_KEY[$INPUT]}
+		INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
 		echo -e "\n$WARN 输入低于边界错误，将默认使用 ${BLUE}${INPUT_KEY:2}${PLAIN} 作为源！"
 		sleep 2s
 	fi
@@ -197,7 +197,7 @@ function ChooseMirrors() {
 	if [ "$INPUT" -gt "${SOURCE_LIST_LEN}" ];then
 		INPUT=${SOURCE_LIST_LEN}
 		TMP_INPUT=`expr $INPUT - 1`
-		INPUT_KEY=${SOURCE_LIST_KEY[$INPUT]}
+		INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
 		echo -e "\n$WARN 输入超出边界错误，将默认使用 ${BLUE}${INPUT_KEY:2}${PLAIN} 作为源！"
 		sleep 2s
 	fi
