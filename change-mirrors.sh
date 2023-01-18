@@ -54,9 +54,24 @@ function PermissionJudgment() {
     fi
 }
 
+## 系统判定变量
+function EnvJudgment() {
+    ## 判定当前系统基于 Debian or RedHat
+    if [ -s $RedHatRelease ]; then
+        SYSTEM_FACTIONS=${SYSTEM_REDHAT}
+    elif [ -s $DebianVersion ]; then
+        SYSTEM_FACTIONS=${SYSTEM_DEBIAN}
+    else
+        echo -e "\n$ERROR 无法判断当前运行环境，请先确认本脚本针对当前操作系统是否适配\n"
+        exit
+    fi
+
+    echo $SYSTEM_FACTIONS
+}
 
 function RunMain(){
 	PermissionJudgment
+    EnvJudgment
 
 }
 
