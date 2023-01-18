@@ -291,7 +291,7 @@ function RunMain(){
     DownloadScript
     InstallScript
     RemoveScript
-    AuthorSignature
+    AuthorMessage
 }
 
 # 执行
