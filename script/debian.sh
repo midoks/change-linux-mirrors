@@ -122,17 +122,13 @@ function AutoSizeStr(){
 	NAME_STR_LEN=`echo "$NAME_STR" | wc -L`
 	NAME_NUM_LEN=`echo "$NAME_NUM" | wc -L`
 
-	echo "NAME_STR_LEN:$NAME_STR_LEN"
-	fix_len=20
+	fix_len=30
 	remaining_len=`expr $fix_len - $NAME_STR_LEN - $NAME_NUM_LEN`
-	echo "remaining_len:$remaining_len"
 	FIX_SPACE=' '
 	for ((ass_i=1;ass_i<=$remaining_len;ass_i++))
 	do 
 		FIX_SPACE="$FIX_SPACE "
 	done
-
-
 	echo -e " ❖   ${1}${FIX_SPACE}${2})"
 }
 
