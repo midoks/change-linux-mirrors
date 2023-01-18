@@ -119,8 +119,6 @@ function AutoSizeStr(){
 	NAME_STR_LEN=`"$NAME_STR"|awk '{print length($0)}'`
 	NAME_NUM_LEN=`"$NAME_NUM"|awk '{print length($0)}'`
 
-
-
 	echo "NAME_STR_LEN:$NAME_STR_LEN"
 	echo "NAME_NUM_LEN:$NAME_NUM_LEN"
 
