@@ -53,6 +53,8 @@ SOURCE_LIST["e_搜狐"]="mirrors.sohu.com"
 SOURCE_LIST["f_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
 SOURCE_LIST["f_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
+sort $SOURCE_LIST
+
 # SOURCE_LIST[0]=deb.debian.org
 # SOURCE_LIST[1]=deb.debian.org
 # SOURCE_LIST[2]=mirrors.linode.com
