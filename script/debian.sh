@@ -23,14 +23,12 @@ SYSTEM_NAME=debian
 SYSTEM_VERSION_NUMBER=$(cat /etc/os-release | grep -E "VERSION_ID=" | awk -F '=' '{print$2}' | sed "s/[\'\"]//g")
 
 
-SOURCE_LIST[1]=deb.debian.org
-SOURCE_LIST[2]=deb.debian.org
-SOURCE_LIST[3]=mirrors.linode.com
+SOURCE_LIST[0]=deb.debian.org
+SOURCE_LIST[1]=mirrors.linode.com
 SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
 
-SOURCE_LIST_LANG[1]=Debian官方
-SOURCE_LIST_LANG[2]=Debian官方
-SOURCE_LIST_LANG[3]=LINODE
+SOURCE_LIST_LANG[0]=Debian官方
+SOURCE_LIST_LANG[1]=LINODE
 
 ## 系统判定变量
 function EnvJudgment() {
