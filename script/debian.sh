@@ -5,7 +5,7 @@
 ## License: Apache License
 ## Github: https://github.com/midoks/change-linux-mirrors
 
-export LANG=zh_CN.utf-8
+# export LANG=zh_CN.utf-8
 
 ARCH=$(uname -m)
 
