@@ -122,7 +122,7 @@ function AutoSizeStr(){
 	done
 
 
-	echo -e " ❖   ${NAME_STR}${FIX_SPACE}${NAME_NUM})"
+	echo -e " ❖   ${1}${FIX_SPACE}${2})"
 }
 
 ## 选择官方源
