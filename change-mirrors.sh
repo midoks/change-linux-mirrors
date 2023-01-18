@@ -56,7 +56,7 @@ function PermissionJudgment() {
 
 function DownloadScript(){
     RemoveScript
-    echo -e "\n$GREEN 下载脚本中...\n"
+    echo -e "\n$GREEN 下载脚本中...${PLAIN}\n"
     sleep 2s
     curl -sSLo /tmp/dev.zip https://github.com/midoks/change-linux-mirrors/archive/refs/heads/main.zip
     cd /tmp && unzip /tmp/dev.zip
