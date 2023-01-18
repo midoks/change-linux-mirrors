@@ -147,6 +147,7 @@ function ChooseMirrors() {
 		INPUT=${SOURCE_LIST_LEN}
 		TMP_INPUT=`expr $INPUT - 1`
 		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}${SOURCE_LIST_LANG[$TMP_INPUT]}${PLAIN} 作为源！"
+		sleep 2s
 	fi
 
     INPUT=`expr $INPUT - 1`
