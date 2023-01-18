@@ -4,6 +4,7 @@
 ## Modified: 2023-01-18
 ## License: Apache License
 ## Github: https://github.com/midoks/change-linux-mirrors
+## mirror:https://www.debian.org/mirror/list
 
 ARCH=$(uname -m)
 
@@ -37,32 +38,50 @@ SYSTEM_VERSION=$(${DebianRelease} -cs)
 SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 
 
-SOURCE_LIST[0]=deb.debian.org
-SOURCE_LIST[1]=mirrors.linode.com
-SOURCE_LIST[2]=mirrors.aliyun.com
-SOURCE_LIST[3]=mirrors.cloud.aliyuncs.com
-SOURCE_LIST[4]=mirrors.tencent.com
-SOURCE_LIST[5]=mirrors.tencentyun.com
-SOURCE_LIST[6]=repo.huaweicloud.com
-SOURCE_LIST[7]=mirrors.myhuaweicloud.com
-SOURCE_LIST[8]=mirrors.163.com
-SOURCE_LIST[9]=mirrors.sohu.com
-SOURCE_LIST[10]=mirrors.tuna.tsinghua.edu.cn
-SOURCE_LIST[11]=mirrors.ustc.edu.cn
+declare -A SOURCE_LIST
+
+SOURCE_LIST["Debian官方"]="deb.debian.org"
+SOURCE_LIST["Debian官方[中国]"]="deb.debian.org"
+SOURCE_LIST["LINODE"]="mirrors.linode.com"
+SOURCE_LIST["阿里云"]="mirrors.aliyun.com"
+SOURCE_LIST["阿里云[内网]"]="mirrors.cloud.aliyuncs.com"
+SOURCE_LIST["腾讯云"]="mirrors.tencent.com"
+SOURCE_LIST["腾讯云[内网]"]="mirrors.tencentyun.com"
+SOURCE_LIST["华为云"]="repo.huaweicloud.com"
+SOURCE_LIST["华为云[内网]"]="mirrors.myhuaweicloud.com"
+SOURCE_LIST["网易"]="mirrors.163.com"
+SOURCE_LIST["搜狐"]="mirrors.sohu.com"
+SOURCE_LIST["清华大学"]="mirrors.tuna.tsinghua.edu.cn"
+SOURCE_LIST["中国科学技术大学"]="mirrors.ustc.edu.cn"
+
+# SOURCE_LIST[0]=deb.debian.org
+# SOURCE_LIST[1]=deb.debian.org
+# SOURCE_LIST[2]=mirrors.linode.com
+# SOURCE_LIST[3]=mirrors.aliyun.com
+# SOURCE_LIST[4]=mirrors.cloud.aliyuncs.com
+# SOURCE_LIST[5]=mirrors.tencent.com
+# SOURCE_LIST[6]=mirrors.tencentyun.com
+# SOURCE_LIST[7]=repo.huaweicloud.com
+# SOURCE_LIST[8]=mirrors.myhuaweicloud.com
+# SOURCE_LIST[9]=mirrors.163.com
+# SOURCE_LIST[10]=mirrors.sohu.com
+# SOURCE_LIST[11]=mirrors.tuna.tsinghua.edu.cn
+# SOURCE_LIST[12]=mirrors.ustc.edu.cn
 
 
-SOURCE_LIST_LANG[0]="Debian官方"
-SOURCE_LIST_LANG[1]="LINODE"
-SOURCE_LIST_LANG[2]="阿里云"
-SOURCE_LIST_LANG[3]="阿里云[内网]"
-SOURCE_LIST_LANG[4]="腾讯云"
-SOURCE_LIST_LANG[5]="腾讯云[内网]"
-SOURCE_LIST_LANG[6]="华为云"
-SOURCE_LIST_LANG[7]="华为云[内网]"
-SOURCE_LIST_LANG[8]="网易"
-SOURCE_LIST_LANG[9]="搜狐"
-SOURCE_LIST_LANG[10]="清华大学"
-SOURCE_LIST_LANG[11]="中国科学技术大学"
+# SOURCE_LIST_LANG[0]="Debian官方"
+# SOURCE_LIST_LANG[1]="Debian官方[中国]"
+# SOURCE_LIST_LANG[]="LINODE"
+# SOURCE_LIST_LANG[2]="阿里云"
+# SOURCE_LIST_LANG[3]="阿里云[内网]"
+# SOURCE_LIST_LANG[4]="腾讯云"
+# SOURCE_LIST_LANG[5]="腾讯云[内网]"
+# SOURCE_LIST_LANG[6]="华为云"
+# SOURCE_LIST_LANG[7]="华为云[内网]"
+# SOURCE_LIST_LANG[8]="网易"
+# SOURCE_LIST_LANG[9]="搜狐"
+# SOURCE_LIST_LANG[10]="清华大学"
+# SOURCE_LIST_LANG[11]="中国科学技术大学"
 
 SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
 
