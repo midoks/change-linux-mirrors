@@ -138,42 +138,21 @@ function ChooseMirrors() {
 
     expr $1 "+" 10 &> /dev/null
 	if [ $? -ne 1 ];then
-		INPUT=0
+		INPUT=1
+		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}Debian官方${PLAIN} 作为源！"
+        sleep 2s
+	fi
+
+	if [ "$INPUT" -gt "${SOURCE_LIST_LEN}" ];then
+		INPUT=${SOURCE_LIST_LEN}
+		TMP_INPUT=`expr $INPUT - 1`
+		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}${SOURCE_LIST_LANG[$TMP_INPUT]}${PLAIN} 作为源！"
 	fi
 
     INPUT=`expr $INPUT - 1`
-    echo $INPUT
-    echo ${SOURCE_LIST_LANG[$INPUT]}
-    case $INPUT in
-    1)
-        SOURCE="deb.debian.org"
-        ;;
-    *)
-        SOURCE="deb.debian.org"
-        echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}Debian官方${PLAIN} 作为源！"
-        sleep 2s
-        ;;
-    esac
+    SOURCE=${SOURCE_LIST_LANG[$INPUT]}
 
-    # CHOICE_A_TMP=$(echo -e "\n  ${BOLD}└─ 默认使用镜像站的公网地址，是否继续? [Y/n] ${PLAIN}")
-    # read -p "${CHOICE_A_TMP}" INPUT
-    # [ -z ${INPUT} ] && INPUT=Y
-    # case $INPUT in
-    # [Yy] | [Yy][Ee][Ss])
-    #     SOURCE=${Extranet}
-    #     ;;
-    # [Nn] | [Nn][Oo])
-    #     SOURCE=${Intranet}
-    #     echo -e "\n  $WARN 已切换至云计算厂商镜像站的内网访问地址，仅限对应厂商云服务器用户使用！"
-    #     NOT_SUPPORT_HTTPS="True"
-    #     ;;
-    # *)
-    #     SOURCE=${Extranet}
-    #     echo -e "\n$WARN 输入错误，默认使用公网地址！"
-    #     ;;
-    # esac
-
-       ## 选择同步软件源所使用的 WEB 协议（ HTTP：80 端口，HTTPS：443 端口）
+    ## 选择同步软件源所使用的 WEB 协议（ HTTP：80 端口，HTTPS：443 端口）
     if [[ ${NOT_SUPPORT_HTTPS} == "True" ]]; then
         WEB_PROTOCOL="http"
     else
