@@ -102,6 +102,13 @@ function CloseFirewall() {
     fi
 }
 
+function AutoSizeStr(){
+	NAME_STR=$1
+	NAME_NUM=$2
+
+	echo -e " ❖   $1              $2)"
+}
+
 ## 选择官方源
 function ChooseMirrors() {
     clear
@@ -124,7 +131,8 @@ function ChooseMirrors() {
     i=0
     for V in ${SOURCE_LIST[@]}; do
     num=`expr $i + 1`
-	echo -e " ❖   ${SOURCE_LIST_LANG[$i]}              $num)"
+	# echo -e " ❖   ${SOURCE_LIST_LANG[$i]}              $num)"
+	AutoSizeStr ${SOURCE_LIST_LANG[$i]} $num
 	i=`expr $i + 1`
 	done
     # echo -e ' ❖   Debian官方              1)'
@@ -188,7 +196,6 @@ function ChooseMirrors() {
             ;;
         esac
     fi
-
 }
 
 function BackupMirrors(){
