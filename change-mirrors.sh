@@ -55,6 +55,7 @@ function PermissionJudgment() {
 }
 
 function DownloadScript(){
+    RemoveScript
     curl -sSLo /tmp/dev.zip https://github.com/midoks/change-linux-mirrors/archive/refs/heads/main.zip
     cd /tmp && unzip /tmp/dev.zip
 }
