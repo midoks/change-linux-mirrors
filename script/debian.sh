@@ -108,9 +108,6 @@ function AutoSizeStr(){
 	NAME_STR=$1
 	NAME_NUM=$2
 
-	# TT=#####################################################
-	# echo "ttlen:${#TT}"
-
 	# NAME_STR_LEN=${#NAME_STR}
 	# NAME_NUM_LEN=${#NAME_NUM}
 
