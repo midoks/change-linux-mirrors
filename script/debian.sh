@@ -316,20 +316,16 @@ function UpgradeSoftware() {
     case $INPUT in
     [Yy] | [Yy][Ee][Ss])
         echo -e ''
-        case ${SYSTEM_FACTIONS} in
-        Debian)
-            apt-get upgrade -y
-            ;;
-        esac
+        apt-get upgrade -y
         CHOICE_C=$(echo -e "\n${BOLD}└─ 是否清理已下载的软件包缓存? [Y/n] ${PLAIN}")
         read -p "${CHOICE_C}" INPUT
         [ -z ${INPUT} ] && INPUT=Y
         case $INPUT in
         [Yy] | [Yy][Ee][Ss])
-            if [ ${SYSTEM_FACTIONS} = ${SYSTEM_DEBIAN} ]; then
-                apt-get autoremove -y >/dev/null 2>&1
-                apt-get clean >/dev/null 2>&1
-            fi
+           
+            apt-get autoremove -y >/dev/null 2>&1
+            apt-get clean >/dev/null 2>&1
+           
             echo -e "\n$COMPLETE 清理完毕"
             ;;
         [Nn] | [Nn][Oo]) ;;
