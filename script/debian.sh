@@ -42,7 +42,7 @@ SOURCE_LIST[1]=mirrors.linode.com
 
 SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
 
-SOURCE_LIST_LANG[0]="Debian官方"
+SOURCE_LIST_LANG[0]="Debian"
 SOURCE_LIST_LANG[1]="LINODE"
 
 
