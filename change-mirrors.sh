@@ -142,6 +142,25 @@ function EnvJudgment() {
     echo $SYNC_TXT
 }
 
+## 关闭防火墙和SELinux
+function CloseFirewall() {
+    if [[ $(systemctl is-active firewalld) == "active" ]]; then
+        CHOICE_C=$(echo -e "\n${BOLD}└─ 是否关闭防火墙和 SELinux ? [Y/n] ${PLAIN}")
+        read -p "${CHOICE_C}" INPUT
+        [ -z ${INPUT} ] && INPUT=Y
+        case $INPUT in
+        [Yy] | [Yy][Ee][Ss])
+            systemctl disable --now firewalld >/dev/null 2>&1
+            [ -s $SelinuxConfig ] && sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" $SelinuxConfig && setenforce 0 >/dev/null 2>&1
+            ;;
+        [Nn] | [Nn][Oo]) ;;
+        *)
+            echo -e "\n$WARN 输入错误，默认不关闭！"
+            ;;
+        esac
+    fi
+}
+
 ## 选择官方源
 function ChooseMirrors() {
     clear
@@ -149,7 +168,7 @@ function ChooseMirrors() {
     echo -e '|                                                   |'
     echo -e '|   =============================================   |'
     echo -e '|                                                   |'
-    echo -e '|       欢迎使用 Linux 一键更换系统软件源脚本     |'
+    echo -e '|       欢迎使用 Linux 一键更换系统软件源脚本       |'
     echo -e '|                                                   |'
     echo -e '|   =============================================   |'
     echo -e '|                                                   |'
@@ -178,11 +197,13 @@ function ChooseMirrors() {
         ;;
     *)
         SOURCE="deb.debian.org"
-        echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}官方${PLAIN} 作为源！"
+        echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}Debian官方${PLAIN} 作为源！"
         sleep 2s
         ;;
     esac
 }
+
+
 function RunMain(){
 	PermissionJudgment
     EnvJudgment
