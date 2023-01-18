@@ -39,10 +39,13 @@ SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 
 SOURCE_LIST[0]=deb.debian.org
 SOURCE_LIST[1]=mirrors.linode.com
-SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
 
 SOURCE_LIST_LANG[0]=Debian官方
 SOURCE_LIST_LANG[1]=LINODE
+
+SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
+
+
 
 ## 系统判定变量
 function EnvJudgment() {
