@@ -45,6 +45,8 @@ SOURCE_LIST[4]=mirrors.tencent.com
 SOURCE_LIST[5]=mirrors.tencentyun.com
 SOURCE_LIST[6]=repo.huaweicloud.com
 SOURCE_LIST[7]=mirrors.myhuaweicloud.com
+SOURCE_LIST[8]=mirrors.163.com
+SOURCE_LIST[8]=mirrors.sohu.com
 
 SOURCE_LIST_LANG[0]="Debian官方"
 SOURCE_LIST_LANG[1]="LINODE"
@@ -54,6 +56,8 @@ SOURCE_LIST_LANG[4]="腾讯云"
 SOURCE_LIST_LANG[5]="腾讯云[内网]"
 SOURCE_LIST_LANG[6]="华为云"
 SOURCE_LIST_LANG[7]="华为云[内网]"
+SOURCE_LIST_LANG[8]="网易"
+SOURCE_LIST_LANG[8]="搜狐"
 
 SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
 
