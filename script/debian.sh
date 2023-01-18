@@ -180,21 +180,22 @@ function ChooseMirrors() {
     expr $INPUT "+" 10 &> /dev/null
 	if [ "$?" -ne "0" ];then
 		INPUT=1
-		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}Debian官方${PLAIN} 作为源！"
+		TMP_INPUT=`expr $INPUT - 1`
+		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}${SOURCE_LIST_KEY[$TMP_INPUT]}${PLAIN} 作为源！"
         sleep 2s
 	fi
 
 	if [ "$INPUT" -lt "0" ];then
 		INPUT=1
 		TMP_INPUT=`expr $INPUT - 1`
-		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}${SOURCE_LIST_LANG[$TMP_INPUT]}${PLAIN} 作为源！"
+		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}${SOURCE_LIST_KEY[$TMP_INPUT]}${PLAIN} 作为源！"
 		sleep 2s
 	fi
 
 	if [ "$INPUT" -gt "${SOURCE_LIST_LEN}" ];then
 		INPUT=${SOURCE_LIST_LEN}
 		TMP_INPUT=`expr $INPUT - 1`
-		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}${SOURCE_LIST_LANG[$TMP_INPUT]}${PLAIN} 作为源！"
+		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}${SOURCE_LIST_KEY[$TMP_INPUT]}${PLAIN} 作为源！"
 		sleep 2s
 	fi
 
@@ -202,7 +203,7 @@ function ChooseMirrors() {
     INPUT_KEY=${SOURCE_LIST[$INPUT]}
     SOURCE=${SOURCE_LIST[$INPUT_KEY]}
 
-	echo -e "\n将使用 ${BLUE}${SOURCE_LIST_LANG[$INPUT]}${PLAIN} 作为源！"    
+	echo -e "\n将使用 ${BLUE}${SOURCE_LIST[$INPUT]}${PLAIN} 作为源！"    
 
     ## 选择同步软件源所使用的 WEB 协议（ HTTP：80 端口，HTTPS：443 端口）
     if [[ ${NOT_SUPPORT_HTTPS} == "True" ]]; then
