@@ -39,6 +39,7 @@ SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 
 
 declare -A SOURCE_LIST
+
 SOURCE_LIST["a_Debian官方"]="deb.debian.org"
 SOURCE_LIST["a_Debian官方[中国]"]="deb.debian.org"
 SOURCE_LIST["a_LINODE"]="mirrors.linode.com"
@@ -53,40 +54,7 @@ SOURCE_LIST["e_搜狐"]="mirrors.sohu.com"
 SOURCE_LIST["f_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
 SOURCE_LIST["f_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
-echo ${!SOURCE_LIST[@]}
-list=$(echo ${!SOURCE_LIST[@]} | tr ' ' '\n' | sort -n)
-
-# sort $SOURCE_LIST
-
-# SOURCE_LIST[0]=deb.debian.org
-# SOURCE_LIST[1]=deb.debian.org
-# SOURCE_LIST[2]=mirrors.linode.com
-# SOURCE_LIST[3]=mirrors.aliyun.com
-# SOURCE_LIST[4]=mirrors.cloud.aliyuncs.com
-# SOURCE_LIST[5]=mirrors.tencent.com
-# SOURCE_LIST[6]=mirrors.tencentyun.com
-# SOURCE_LIST[7]=repo.huaweicloud.com
-# SOURCE_LIST[8]=mirrors.myhuaweicloud.com
-# SOURCE_LIST[9]=mirrors.163.com
-# SOURCE_LIST[10]=mirrors.sohu.com
-# SOURCE_LIST[11]=mirrors.tuna.tsinghua.edu.cn
-# SOURCE_LIST[12]=mirrors.ustc.edu.cn
-
-
-# SOURCE_LIST_LANG[0]="Debian官方"
-# SOURCE_LIST_LANG[1]="Debian官方[中国]"
-# SOURCE_LIST_LANG[]="LINODE"
-# SOURCE_LIST_LANG[2]="阿里云"
-# SOURCE_LIST_LANG[3]="阿里云[内网]"
-# SOURCE_LIST_LANG[4]="腾讯云"
-# SOURCE_LIST_LANG[5]="腾讯云[内网]"
-# SOURCE_LIST_LANG[6]="华为云"
-# SOURCE_LIST_LANG[7]="华为云[内网]"
-# SOURCE_LIST_LANG[8]="网易"
-# SOURCE_LIST_LANG[9]="搜狐"
-# SOURCE_LIST_LANG[10]="清华大学"
-# SOURCE_LIST_LANG[11]="中国科学技术大学"
-
+SOURCE_LIST_KEY=$(echo ${!SOURCE_LIST[@]} | tr ' ' '\n' | sort -n)
 SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
 
 
@@ -188,7 +156,7 @@ function ChooseMirrors() {
     echo -e '#####################################################'
     echo -e ''
     cm_i=0
-    for V in ${!SOURCE_LIST[@]}; do
+    for V in ${SOURCE_LIST_KEY[@]}; do
     num=`expr $cm_i + 1`
 	# echo -e " ❖   ${SOURCE_LIST_LANG[$cm_i]}              $num)"
 	AutoSizeStr "$V" "$num"
@@ -231,7 +199,8 @@ function ChooseMirrors() {
 	fi
 
     INPUT=`expr $INPUT - 1`
-    SOURCE=${SOURCE_LIST[$INPUT]}
+    INPUT_KEY=${SOURCE_LIST[$INPUT]}
+    SOURCE=${SOURCE_LIST[$INPUT_KEY]}
 
 	echo -e "\n将使用 ${BLUE}${SOURCE_LIST_LANG[$INPUT]}${PLAIN} 作为源！"    
 
