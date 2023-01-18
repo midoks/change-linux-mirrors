@@ -202,6 +202,24 @@ function ChooseMirrors() {
         ;;
     esac
 
+    CHOICE_A_TMP=$(echo -e "\n  ${BOLD}└─ 默认使用镜像站的公网地址，是否继续? [Y/n] ${PLAIN}")
+    read -p "${CHOICE_A_TMP}" INPUT
+    [ -z ${INPUT} ] && INPUT=Y
+    case $INPUT in
+    [Yy] | [Yy][Ee][Ss])
+        SOURCE=${Extranet}
+        ;;
+    [Nn] | [Nn][Oo])
+        SOURCE=${Intranet}
+        echo -e "\n  $WARN 已切换至云计算厂商镜像站的内网访问地址，仅限对应厂商云服务器用户使用！"
+        NOT_SUPPORT_HTTPS="True"
+        ;;
+    *)
+        SOURCE=${Extranet}
+        echo -e "\n$WARN 输入错误，默认使用公网地址！"
+        ;;
+    esac
+
        ## 选择同步软件源所使用的 WEB 协议（ HTTP：80 端口，HTTPS：443 端口）
     if [[ ${NOT_SUPPORT_HTTPS} == "True" ]]; then
         WEB_PROTOCOL="http"
