@@ -19,11 +19,15 @@ WARN='[\033[33mWARN\033[0m]'
 ERROR='[\033[31mERROR\033[0m]'
 WORKING='[\033[34m*\033[0m]'
 
+
 DebianVersion=/etc/debian_version
 DebianSourceList=/etc/apt/sources.list
 DebianSourceListBackup=/etc/apt/sources.list.bak
 DebianExtendListDir=/etc/apt/sources.list.d
 DebianExtendListDirBackup=/etc/apt/sources.list.d.bak
+SYSTEM_UBUNTU="Ubuntu"
+SYSTEM_DEBIAN="Debian"
+
 
 SYSTEM_NAME=debian
 SYSTEM_VERSION_NUMBER=$(cat /etc/os-release | grep -E "VERSION_ID=" | awk -F '=' '{print$2}' | sed "s/[\'\"]//g")
@@ -64,6 +68,15 @@ function EnvJudgment() {
         ;;
     esac
 
+    if [ ${SYSTEM_JUDGMENT} = ${SYSTEM_UBUNTU} ]; then
+        if [ ${ARCH} = "x86_64" ] || [ ${ARCH} = "*i?86*" ]; then
+            SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
+        else
+            SOURCE_BRANCH=ubuntu-ports
+        fi
+    else
+        SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
+    fi
     SYNC_TXT="更新"
 }
 
@@ -178,7 +191,95 @@ function ChooseMirrors() {
 }
 
 function BackupMirrors(){
-	echo "BackupMirrors"
+	if [ ${SYSTEM_FACTIONS} = ${SYSTEM_DEBIAN} ]; then
+        ## 判断 /etc/apt/sources.list.d 目录下是否存在文件
+        [ -d $DebianExtendListDir ] && ls $DebianExtendListDir | grep *.list -q
+        VERIFICATION_FILES=$?
+        ## 判断 /etc/apt/sources.list.d.bak 目录下是否存在文件
+        [ -d $DebianExtendListDirBackup ] && ls $DebianExtendListDirBackup | grep *.list -q
+        VERIFICATION_BACKUPFILES=$?
+    fi
+
+    if [ ${SYSTEM_FACTIONS} = ${SYSTEM_DEBIAN} ]; then
+        ## /etc/apt/sources.list
+        if [ -s $DebianSourceList ]; then
+            if [ -s $DebianSourceListBackup ]; then
+                CHOICE_BACKUP1=$(echo -e "\n${BOLD}└─ 检测到系统存在已备份的 list 源文件，是否覆盖备份? [Y/n] ${PLAIN}")
+                read -p "${CHOICE_BACKUP1}" INPUT
+                [ -z ${INPUT} ] && INPUT=Y
+                case $INPUT in
+                [Yy] | [Yy][Ee][Ss])
+                    cp -rf $DebianSourceList $DebianSourceListBackup >/dev/null 2>&1
+                    ;;
+                [Nn] | [Nn][Oo]) ;;
+                *)
+                    echo -e "\n$WARN 输入错误，默认不覆盖！"
+                    ;;
+                esac
+            else
+                cp -rf $DebianSourceList $DebianSourceListBackup >/dev/null 2>&1
+                echo -e "\n$COMPLETE 已备份原有 list 源文件至 $DebianSourceListBackup"
+                sleep 1s
+            fi
+        else
+            [ -f $DebianSourceList ] || touch $DebianSourceList
+            echo -e ''
+        fi
+
+        ## /etc/apt/sources.list.d
+        if [ -d $DebianExtendListDir ] && [ ${VERIFICATION_FILES} -eq 0 ]; then
+            if [ -d $DebianExtendListDirBackup ] && [ ${VERIFICATION_BACKUPFILES} -eq 0 ]; then
+                CHOICE_BACKUP2=$(echo -e "\n${BOLD}└─ 检测到系统存在已备份的 list 第三方源文件，是否覆盖备份? [Y/n] ${PLAIN}")
+                read -p "${CHOICE_BACKUP2}" INPUT
+                [ -z ${INPUT} ] && INPUT=Y
+                case $INPUT in
+                [Yy] | [Yy][Ee][Ss])
+                    cp -rf $DebianExtendListDir/* $DebianExtendListDirBackup >/dev/null 2>&1
+                    ;;
+                [Nn] | [Nn][Oo]) ;;
+                *)
+                    echo -e "\n$WARN 输入错误，默认不覆盖！"
+                    ;;
+                esac
+            else
+                [ -d $DebianExtendListDirBackup ] || mkdir -p $DebianExtendListDirBackup
+                cp -rf $DebianExtendListDir/* $DebianExtendListDirBackup >/dev/null 2>&1
+                echo -e "$COMPLETE 已备份原有 list 第三方源文件至 $DebianExtendListDirBackup 目录"
+                sleep 1s
+            fi
+        fi
+    fi
+}
+
+## 删除原有源
+function RemoveOldMirrorsFiles() {
+    if [ ${SYSTEM_FACTIONS} = ${SYSTEM_DEBIAN} ]; then
+        [ -f $DebianSourceList ] && sed -i '1,$d' $DebianSourceList
+    fi
+}
+
+## 更换国内源
+function ChangeMirrors() {
+    if [ ${SYSTEM_FACTIONS} = ${SYSTEM_DEBIAN} ]; then
+        DebianMirrors
+    fi
+    echo -e "\n${WORKING} 开始更新软件源...\n"
+    case ${SYSTEM_FACTIONS} in
+    Debian)
+        apt-get update
+        ;;
+    esac
+    VERIFICATION_SOURCESYNC=$?
+    if [ ${VERIFICATION_SOURCESYNC} -eq 0 ]; then
+        echo -e "\n$COMPLETE 软件源更换完毕"
+    else
+        echo -e "\n$ERROR 软件源${SYNC_TXT}失败\n"
+        echo -e "请再次执行脚本并更换软件源后进行尝试，如果仍然${SYNC_TXT}失败那么可能由以下原因导致"
+        echo -e "1. 网络问题：例如网络异常、网络间歇式中断、由地区影响的网络因素等"
+        echo -e "2. 软件源问题：所选镜像站正在维护，或者出现罕见的少数文件同步出错导致软件源${SYNC_TXT}命令执行后返回错误状态"
+        echo ''
+        exit
+    fi
 }
 
 ## 更换基于 Debian 系 Linux 发行版的国内源
@@ -216,14 +317,54 @@ deb ${WEB_PROTOCOL}://${SOURCE}/${SOURCE_BRANCH} ${SYSTEM_VERSION}-backports mai
     esac
 }
 
+## 更新软件包
+function UpgradeSoftware() {
+    CHOICE_B=$(echo -e "\n${BOLD}└─ 是否更新软件包? [Y/n] ${PLAIN}")
+    read -p "${CHOICE_B}" INPUT
+    [ -z ${INPUT} ] && INPUT=Y
+    case $INPUT in
+    [Yy] | [Yy][Ee][Ss])
+        echo -e ''
+        case ${SYSTEM_FACTIONS} in
+        Debian)
+            apt-get upgrade -y
+            ;;
+        esac
+        CHOICE_C=$(echo -e "\n${BOLD}└─ 是否清理已下载的软件包缓存? [Y/n] ${PLAIN}")
+        read -p "${CHOICE_C}" INPUT
+        [ -z ${INPUT} ] && INPUT=Y
+        case $INPUT in
+        [Yy] | [Yy][Ee][Ss])
+            if [ ${SYSTEM_FACTIONS} = ${SYSTEM_DEBIAN} ]; then
+                apt-get autoremove -y >/dev/null 2>&1
+                apt-get clean >/dev/null 2>&1
+            fi
+            echo -e "\n$COMPLETE 清理完毕"
+            ;;
+        [Nn] | [Nn][Oo]) ;;
+        *)
+            echo -e "\n$WARN 输入错误，默认不清理！"
+            ;;
+        esac
+        ;;
+    [Nn] | [Nn][Oo]) ;;
+    *)
+        echo -e "\n$WARN 输入错误，默认不更新！"
+        ;;
+    esac
+}
+
+
 function RunMain(){
 	EnvJudgment
 	ChooseMirrors
 	BackupMirrors
+	RemoveOldMirrorsFiles
+    ChangeMirrors
+    UpgradeSoftware
 
-	SYSTEM_JUDGMENT
-	echo "SYSTEM_JUDGMENT:${SYSTEM_JUDGMENT}"
-	echo "SOURCE_BRANCH:${SOURCE_BRANCH}"
+	# echo "SYSTEM_JUDGMENT:${SYSTEM_JUDGMENT}"
+	# echo "SOURCE_BRANCH:${SOURCE_BRANCH}"
 }
 
 # 执行
