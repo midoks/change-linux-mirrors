@@ -92,6 +92,54 @@ function EnvJudgment() {
         fi
         ;;
     esac
+
+    ## 判定系统处理器架构
+    case ${ARCH} in
+    x86_64)
+        SYSTEM_ARCH="x86_64"
+        ;;
+    aarch64)
+        SYSTEM_ARCH="ARM64"
+        ;;
+    armv7l)
+        SYSTEM_ARCH="ARMv7"
+        ;;
+    armv6l)
+        SYSTEM_ARCH="ARMv6"
+        ;;
+    i686)
+        SYSTEM_ARCH="x86_32"
+        ;;
+    *)
+        SYSTEM_ARCH=${ARCH}
+        ;;
+    esac
+
+    ## 定义软件源分支名称
+    if [ ${SYSTEM_JUDGMENT} = ${SYSTEM_UBUNTU} ]; then
+        if [ ${ARCH} = "x86_64" ] || [ ${ARCH} = "*i?86*" ]; then
+            SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
+        else
+            SOURCE_BRANCH=ubuntu-ports
+        fi
+    elif [ ${SYSTEM_JUDGMENT} = ${SYSTEM_RHEL} ]; then
+        SOURCE_BRANCH="centos"
+    else
+        SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
+    fi
+    ## 定义软件源同步/更新文字
+    case ${SYSTEM_FACTIONS} in
+    Debian)
+        SYNC_TXT="更新"
+        ;;
+    RedHat)
+        SYNC_TXT="同步"
+        ;;
+    esac
+
+    echo $SOURCE_BRANCH
+    echo $SYSTEM_JUDGMENT
+    echo $SYNC_TXT
 }
 
 function RunMain(){
