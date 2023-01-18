@@ -50,9 +50,9 @@ SOURCE_LIST["c_腾讯云[内网]"]="mirrors.tencentyun.com"
 SOURCE_LIST["d_华为云"]="repo.huaweicloud.com"
 SOURCE_LIST["d_华为云[内网]"]="mirrors.myhuaweicloud.com"
 SOURCE_LIST["e_网易"]="mirrors.163.com"
-SOURCE_LIST["3_搜狐"]="mirrors.sohu.com"
-SOURCE_LIST["1_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
-SOURCE_LIST["2_中国科学技术大学"]="mirrors.ustc.edu.cn"
+SOURCE_LIST["e_搜狐"]="mirrors.sohu.com"
+SOURCE_LIST["f_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
+SOURCE_LIST["f_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
 # SOURCE_LIST[0]=deb.debian.org
 # SOURCE_LIST[1]=deb.debian.org
