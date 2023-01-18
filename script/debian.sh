@@ -204,6 +204,8 @@ function ChooseMirrors() {
 
     INPUT=`expr $INPUT - 1`
     INPUT_KEY=${SOURCE_LIST_KEY[$INPUT]}
+
+    echo -e "INPUT_KEY:${INPUT_KEY}"
     SOURCE=${SOURCE_LIST[$INPUT_KEY]}
 
 	echo -e "\n将使用 ${BLUE}${INPUT_KEY:2}${PLAIN} 作为源！"    
