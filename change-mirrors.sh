@@ -149,7 +149,7 @@ function ChooseMirrors() {
     echo -e '|                                                   |'
     echo -e '|   =============================================   |'
     echo -e '|                                                   |'
-    echo -e '|       欢迎使用 Linux 一键更换系统软件源脚本.          |'
+    echo -e '|       欢迎使用 Linux 一键更换系统软件源脚本.       |'
     echo -e '|                                                   |'
     echo -e '|   =============================================   |'
     echo -e '|                                                   |'
@@ -170,6 +170,8 @@ function ChooseMirrors() {
     echo -e ''
     echo -e '#####################################################'
     CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件源 [ 1-13 ]：${PLAIN}")
+
+    read -p "${CHOICE_A}" INPUT
 }
 function RunMain(){
 	PermissionJudgment
