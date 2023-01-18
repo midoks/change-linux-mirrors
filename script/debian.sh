@@ -138,10 +138,11 @@ function ChooseMirrors() {
     CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件源 [ 1-${SOURCE_LIST_LEN} ]：${PLAIN}")
 
     read -p "${CHOICE_A}" INPUT
-
+    echo "INPUT1:${INPUT}"
     expr $1 "+" 10 &> /dev/null
 	if [ $? -ne 1 ];then
 		INPUT=1
+		echo "INPUT2:${INPUT}"
 		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}Debian官方${PLAIN} 作为源！"
         sleep 2s
 	fi
@@ -149,7 +150,7 @@ function ChooseMirrors() {
 	if [ "$INPUT" -gt "${SOURCE_LIST_LEN}" ];then
 		INPUT=${SOURCE_LIST_LEN}
 		TMP_INPUT=`expr $INPUT - 1`
-
+		echo "INPUT3:${INPUT}"
 		echo -e "\n$WARN 输入错误，将默认使用 ${BLUE}${SOURCE_LIST_LANG[$TMP_INPUT]}${PLAIN} 作为源！"
 		sleep 2s
 	fi
