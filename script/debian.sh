@@ -112,7 +112,7 @@ function AutoSizeStr(){
 	NAME_STR_LEN=${#NAME_STR}
 	NAME_NUM_LEN=${#NAME_NUM}
 
-	fix_len=45
+	fix_len=20
 	remaining_len=`expr $fix_len - $NAME_STR_LEN - $NAME_NUM_LEN`
 
 	FIX_SPACE=' '
