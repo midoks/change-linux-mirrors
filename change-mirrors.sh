@@ -72,6 +72,7 @@ function RemoveScript(){
 
 # 安装
 function InstallScript(){
+    sleep 1
     clear
     _os=`uname`
     echo "use system: ${_os}"
