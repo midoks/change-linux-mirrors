@@ -121,7 +121,7 @@ function AutoSizeStr(){
 	remaining_len=`expr $fix_len - $NAME_STR_LEN - $NAME_NUM_LEN`
 	echo "remaining_len:$remaining_len"
 	FIX_SPACE=' '
-	for ((i=1;i<=$remaining_len;i++))
+	for ((ass_i=1;ass_i<=$remaining_len;ass_i++))
 	do 
 		FIX_SPACE="$FIX_SPACE "
 	done
@@ -149,12 +149,12 @@ function ChooseMirrors() {
     echo -e ''
     echo -e '#####################################################'
     echo -e ''
-    i=0
+    cm_i=0
     for V in ${SOURCE_LIST[@]}; do
-    num=`expr $i + 1`
-	echo -e " ❖   ${SOURCE_LIST_LANG[$i]}              $num)"
-	# AutoSizeStr "${SOURCE_LIST_LANG[$i]}" "$num"
-	i=`expr $i + 1`
+    num=`expr $cm_i + 1`
+	# echo -e " ❖   ${SOURCE_LIST_LANG[$cm_i]}              $num)"
+	AutoSizeStr "${SOURCE_LIST_LANG[$cm_i]}" "$num"
+	cm_i=`expr $cm_i + 1`
 	done
     # echo -e ' ❖   Debian官方              1)'
     echo -e ''
