@@ -281,7 +281,7 @@ function InstallScript(){
     else
         OSNAME='unknow'
     fi
-
+    echo "use system: ${OSNAME}"
     bash /tmp/change-linux-mirrors-main/script/${OSNAME}.sh
 }
 
