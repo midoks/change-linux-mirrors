@@ -191,84 +191,75 @@ function ChooseMirrors() {
 }
 
 function BackupMirrors(){
-	if [ ${SYSTEM_FACTIONS} = ${SYSTEM_DEBIAN} ]; then
-        ## 判断 /etc/apt/sources.list.d 目录下是否存在文件
-        [ -d $DebianExtendListDir ] && ls $DebianExtendListDir | grep *.list -q
-        VERIFICATION_FILES=$?
-        ## 判断 /etc/apt/sources.list.d.bak 目录下是否存在文件
-        [ -d $DebianExtendListDirBackup ] && ls $DebianExtendListDirBackup | grep *.list -q
-        VERIFICATION_BACKUPFILES=$?
-    fi
+	
+    ## 判断 /etc/apt/sources.list.d 目录下是否存在文件
+    [ -d $DebianExtendListDir ] && ls $DebianExtendListDir | grep *.list -q
+    VERIFICATION_FILES=$?
+    ## 判断 /etc/apt/sources.list.d.bak 目录下是否存在文件
+    [ -d $DebianExtendListDirBackup ] && ls $DebianExtendListDirBackup | grep *.list -q
+    VERIFICATION_BACKUPFILES=$?
+   
 
-    if [ ${SYSTEM_FACTIONS} = ${SYSTEM_DEBIAN} ]; then
-        ## /etc/apt/sources.list
-        if [ -s $DebianSourceList ]; then
-            if [ -s $DebianSourceListBackup ]; then
-                CHOICE_BACKUP1=$(echo -e "\n${BOLD}└─ 检测到系统存在已备份的 list 源文件，是否覆盖备份? [Y/n] ${PLAIN}")
-                read -p "${CHOICE_BACKUP1}" INPUT
-                [ -z ${INPUT} ] && INPUT=Y
-                case $INPUT in
-                [Yy] | [Yy][Ee][Ss])
-                    cp -rf $DebianSourceList $DebianSourceListBackup >/dev/null 2>&1
-                    ;;
-                [Nn] | [Nn][Oo]) ;;
-                *)
-                    echo -e "\n$WARN 输入错误，默认不覆盖！"
-                    ;;
-                esac
-            else
+    ## /etc/apt/sources.list
+    if [ -s $DebianSourceList ]; then
+        if [ -s $DebianSourceListBackup ]; then
+            CHOICE_BACKUP1=$(echo -e "\n${BOLD}└─ 检测到系统存在已备份的 list 源文件，是否覆盖备份? [Y/n] ${PLAIN}")
+            read -p "${CHOICE_BACKUP1}" INPUT
+            [ -z ${INPUT} ] && INPUT=Y
+            case $INPUT in
+            [Yy] | [Yy][Ee][Ss])
                 cp -rf $DebianSourceList $DebianSourceListBackup >/dev/null 2>&1
-                echo -e "\n$COMPLETE 已备份原有 list 源文件至 $DebianSourceListBackup"
-                sleep 1s
-            fi
+                ;;
+            [Nn] | [Nn][Oo]) ;;
+            *)
+                echo -e "\n$WARN 输入错误，默认不覆盖！"
+                ;;
+            esac
         else
-            [ -f $DebianSourceList ] || touch $DebianSourceList
-            echo -e ''
+            cp -rf $DebianSourceList $DebianSourceListBackup >/dev/null 2>&1
+            echo -e "\n$COMPLETE 已备份原有 list 源文件至 $DebianSourceListBackup"
+            sleep 1s
         fi
+    else
+        [ -f $DebianSourceList ] || touch $DebianSourceList
+        echo -e ''
+    fi
 
-        ## /etc/apt/sources.list.d
-        if [ -d $DebianExtendListDir ] && [ ${VERIFICATION_FILES} -eq 0 ]; then
-            if [ -d $DebianExtendListDirBackup ] && [ ${VERIFICATION_BACKUPFILES} -eq 0 ]; then
-                CHOICE_BACKUP2=$(echo -e "\n${BOLD}└─ 检测到系统存在已备份的 list 第三方源文件，是否覆盖备份? [Y/n] ${PLAIN}")
-                read -p "${CHOICE_BACKUP2}" INPUT
-                [ -z ${INPUT} ] && INPUT=Y
-                case $INPUT in
-                [Yy] | [Yy][Ee][Ss])
-                    cp -rf $DebianExtendListDir/* $DebianExtendListDirBackup >/dev/null 2>&1
-                    ;;
-                [Nn] | [Nn][Oo]) ;;
-                *)
-                    echo -e "\n$WARN 输入错误，默认不覆盖！"
-                    ;;
-                esac
-            else
-                [ -d $DebianExtendListDirBackup ] || mkdir -p $DebianExtendListDirBackup
+    ## /etc/apt/sources.list.d
+    if [ -d $DebianExtendListDir ] && [ ${VERIFICATION_FILES} -eq 0 ]; then
+        if [ -d $DebianExtendListDirBackup ] && [ ${VERIFICATION_BACKUPFILES} -eq 0 ]; then
+            CHOICE_BACKUP2=$(echo -e "\n${BOLD}└─ 检测到系统存在已备份的 list 第三方源文件，是否覆盖备份? [Y/n] ${PLAIN}")
+            read -p "${CHOICE_BACKUP2}" INPUT
+            [ -z ${INPUT} ] && INPUT=Y
+            case $INPUT in
+            [Yy] | [Yy][Ee][Ss])
                 cp -rf $DebianExtendListDir/* $DebianExtendListDirBackup >/dev/null 2>&1
-                echo -e "$COMPLETE 已备份原有 list 第三方源文件至 $DebianExtendListDirBackup 目录"
-                sleep 1s
-            fi
+                ;;
+            [Nn] | [Nn][Oo]) ;;
+            *)
+                echo -e "\n$WARN 输入错误，默认不覆盖！"
+                ;;
+            esac
+        else
+            [ -d $DebianExtendListDirBackup ] || mkdir -p $DebianExtendListDirBackup
+            cp -rf $DebianExtendListDir/* $DebianExtendListDirBackup >/dev/null 2>&1
+            echo -e "$COMPLETE 已备份原有 list 第三方源文件至 $DebianExtendListDirBackup 目录"
+            sleep 1s
         fi
     fi
+  
 }
 
 ## 删除原有源
 function RemoveOldMirrorsFiles() {
-    if [ ${SYSTEM_FACTIONS} = ${SYSTEM_DEBIAN} ]; then
-        [ -f $DebianSourceList ] && sed -i '1,$d' $DebianSourceList
-    fi
+    [ -f $DebianSourceList ] && sed -i '1,$d' $DebianSourceList
 }
 
 ## 更换国内源
 function ChangeMirrors() {
-    if [ ${SYSTEM_FACTIONS} = ${SYSTEM_DEBIAN} ]; then
-        DebianMirrors
-    fi
+    DebianMirrors
     echo -e "\n${WORKING} 开始更新软件源...\n"
-    case ${SYSTEM_FACTIONS} in
-    Debian)
-        apt-get update
-        ;;
-    esac
+    apt-get update -y
     VERIFICATION_SOURCESYNC=$?
     if [ ${VERIFICATION_SOURCESYNC} -eq 0 ]; then
         echo -e "\n$COMPLETE 软件源更换完毕"
