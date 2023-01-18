@@ -151,6 +151,7 @@ function ChooseMirrors() {
 
     INPUT=`expr $INPUT - 1`
     SOURCE=${SOURCE_LIST_LANG[$INPUT]}
+    echo "来源:${SOURCE}"
 
     ## 选择同步软件源所使用的 WEB 协议（ HTTP：80 端口，HTTPS：443 端口）
     if [[ ${NOT_SUPPORT_HTTPS} == "True" ]]; then
