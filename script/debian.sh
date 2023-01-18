@@ -139,6 +139,11 @@ function ChooseMirrors() {
 
     read -p "${CHOICE_A}" INPUT
     echo "INPUT1:${INPUT}"
+
+    if [ "$INPUT" == "" ];then
+    	INPUT=1
+    fi
+
     expr $INPUT "+" 10 &> /dev/null
     echo "err:$?"
 	if [ "$?" -ne "0" ];then
