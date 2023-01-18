@@ -116,7 +116,10 @@ function AutoSizeStr(){
 	remaining_len=`expr $fix_len - $NAME_STR_LEN - $NAME_NUM_LEN`
 
 	$FIX_SPACE=' '
-	for ((i=1;i<=$remaining_len;i++)); do $FIX_SPACE="$FIX_SPACE "; done
+	for ((i=1;i<=$remaining_len;i++))
+	do 
+		$FIX_SPACE="$FIX_SPACE "
+	done
 
 
 	echo -e " ❖   ${NAME_STR}${FIX_SPACE}${NAME_NUM})"
