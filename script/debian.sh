@@ -95,7 +95,7 @@ function ChooseMirrors() {
     echo -e ''
     echo -e '#####################################################'
     echo -e ''
-    i=1
+    i=0
     for V in ${SOURCE_LIST[@]}; do
 	echo -e " ❖   ${SOURCE_LIST_LANG[$i]}              $i)"
 	i=`expr $i + 1`
