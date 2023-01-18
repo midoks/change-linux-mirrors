@@ -221,6 +221,8 @@ function RunMain(){
 	ChooseMirrors
 	BackupMirrors
 
+	SYSTEM_JUDGMENT
+	echo "SYSTEM_JUDGMENT:${SYSTEM_JUDGMENT}"
 	echo "SOURCE_BRANCH:${SOURCE_BRANCH}"
 }
 
