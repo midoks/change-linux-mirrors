@@ -175,7 +175,6 @@ function ChooseMirrors() {
         esac
     fi
 
-    echo "${SYSTEM_JUDGMENT} = ${SYSTEM_CENTOS} -o ${SYSTEM_JUDGMENT} = ${SYSTEM_RHEL}"
 }
 
 function BackupMirrors(){
