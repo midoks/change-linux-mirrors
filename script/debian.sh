@@ -138,7 +138,6 @@ function ChooseMirrors() {
     CHOICE_A=$(echo -e "\n${BOLD}└─ 请选择并输入你想使用的软件源 [ 1-${SOURCE_LIST_LEN} ]：${PLAIN}")
 
     read -p "${CHOICE_A}" INPUT
-
     if [ "$INPUT" == "" ];then
     	INPUT=1
     fi
