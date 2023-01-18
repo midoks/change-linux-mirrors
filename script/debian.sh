@@ -56,7 +56,7 @@ SOURCE_LIST["f_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
 
 SOURCE_LIST_KEY_SORT_TMP=$(echo ${!SOURCE_LIST[@]} | tr ' ' '\n' | sort -n)
-SOURCE_LIST_KEY=(${SOURCE_LIST_KEY_SORT_TMP//\n/})
+SOURCE_LIST_KEY=(${SOURCE_LIST_KEY_SORT_TMP//'\n'/})
 SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
 
 
