@@ -219,27 +219,30 @@ function ChooseMirrors() {
 
 
         IS_NO_EPEL=${SOURCE_NO_EPEL[$INPUT_KEY]}
-        echo "IS_NO_EPEL:${IS_NO_EPEL}"
-
-        if [ ${VERIFICATION_EPEL} -eq 0 ]; then
-            CHOICE_D=$(echo -e "\n  ${BOLD}└─ 检测到系统已安装 EPEL 扩展源，是否替换/覆盖为国内源? [Y/n] ${PLAIN}")
+        if [ "$IS_NO_EPEL" == "" ];then
+        	echo -e "\n${INPUT_KEY:2}源不支持EPEL！"  
+        	EPEL_INSTALL="False"
         else
-            CHOICE_D=$(echo -e "\n  ${BOLD}└─ 是否安装 EPEL 扩展源? [Y/n] ${PLAIN}")
-        fi
-        read -p "${CHOICE_D}" INPUT
-        [ -z ${INPUT} ] && INPUT=Y
-        case $INPUT in
-        [Yy] | [Yy][Ee][Ss])
-            EPEL_INSTALL="True"
-            ;;
-        [Nn] | [Nn][Oo])
-            EPEL_INSTALL="False"
-            ;;
-        *)
-            echo -e "\n  $WARN 输入错误，默认不更换！"
-            EPEL_INSTALL="False"
-            ;;
-        esac
+        	if [ ${VERIFICATION_EPEL} -eq 0 ]; then
+	            CHOICE_D=$(echo -e "\n  ${BOLD}└─ 检测到系统已安装 EPEL 扩展源，是否替换/覆盖为国内源? [Y/n] ${PLAIN}")
+	        else
+	            CHOICE_D=$(echo -e "\n  ${BOLD}└─ 是否安装 EPEL 扩展源? [Y/n] ${PLAIN}")
+	        fi
+	        read -p "${CHOICE_D}" INPUT
+	        [ -z ${INPUT} ] && INPUT=Y
+	        case $INPUT in
+	        [Yy] | [Yy][Ee][Ss])
+	            EPEL_INSTALL="True"
+	            ;;
+	        [Nn] | [Nn][Oo])
+	            EPEL_INSTALL="False"
+	            ;;
+	        *)
+	            echo -e "\n  $WARN 输入错误，默认不更换！"
+	            EPEL_INSTALL="False"
+	            ;;
+	        esac
+        fi        
     fi  
 
     ## 选择同步软件源所使用的 WEB 协议（ HTTP：80 端口，HTTPS：443 端口）
