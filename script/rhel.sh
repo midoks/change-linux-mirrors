@@ -27,6 +27,8 @@ SYSTEM_CENTOS="CentOS"
 SYSTEM_FEDORA="Fedora"
 
 LinuxRelease=/etc/os-release
+RedHatRelease=/etc/redhat-release
+
 RedHatReposDir=/etc/yum.repos.d
 RedHatReposDirBackup=/etc/yum.repos.d.bak
 SelinuxConfig=/etc/selinux/config
