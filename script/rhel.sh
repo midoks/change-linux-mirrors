@@ -1297,11 +1297,17 @@ function UpgradeSoftware() {
 
 
 function RunMain(){
+	echo "EnvJudgment"
 	EnvJudgment
+	echo "ChooseMirrors"
 	ChooseMirrors
+	echo "BackupMirrors"
 	BackupMirrors
+	echo "RemoveOldMirrorsFiles"
 	RemoveOldMirrorsFiles
+	echo "ChangeMirrors"
     ChangeMirrors
+    echo "UpgradeSoftware"
     UpgradeSoftware
 }
 
