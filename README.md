@@ -8,6 +8,12 @@
 bash <(curl -sSL https://raw.githubusercontent.com/midoks/change-linux-mirrors/main/change-mirrors.sh)
 ```
 
+
+### Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/midoks/change-linux-mirrors.svg)](https://starchart.cc/midoks/change-linux-mirrors)
+
+
 - ### 常见问题与帮助
 
   - 如果提示 `Command 'curl' not found` 则说明当前未安装 `curl` 软件包
