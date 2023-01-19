@@ -83,7 +83,11 @@ function InstallScript(){
         exit
     fi
     echo "use system: ${OSNAME}"
-    bash /tmp/change-linux-mirrors-main/script/${OSNAME}.sh
+
+    script_file=/tmp/change-linux-mirrors-main/script/${OSNAME}.sh
+    if [ -s $script_file ];then
+        bash /tmp/change-linux-mirrors-main/script/${OSNAME}.sh
+    fi
 }
 
 
