@@ -234,23 +234,23 @@ function ChooseMirrors() {
 
 function BackupMirrors(){
 	
-    ## 判断 /etc/apt/sources.list.d 目录下是否存在文件
-    [ -d $DebianExtendListDir ] && ls $DebianExtendListDir | grep *.list -q
+    ## 判断 /etc/yum.repos.d 目录下是否存在文件
+    [ -d $RedHatReposDir ] && ls $RedHatReposDir | grep repo -q
     VERIFICATION_FILES=$?
-    ## 判断 /etc/apt/sources.list.d.bak 目录下是否存在文件
-    [ -d $DebianExtendListDirBackup ] && ls $DebianExtendListDirBackup | grep *.list -q
+    ## 判断 /etc/yum.repos.d.bak 目录下是否存在文件
+    [ -d $RedHatReposDirBackup ] && ls $RedHatReposDirBackup | grep repo -q
     VERIFICATION_BACKUPFILES=$?
    
 
-    ## /etc/apt/sources.list
-    if [ -s $DebianSourceList ]; then
-        if [ -s $DebianSourceListBackup ]; then
-            CHOICE_BACKUP1=$(echo -e "\n${BOLD}└─ 检测到系统存在已备份的 list 源文件，是否覆盖备份? [Y/n] ${PLAIN}")
-            read -p "${CHOICE_BACKUP1}" INPUT
+    ## /etc/yum.repos.d
+    if [ ${VERIFICATION_FILES} -eq 0 ]; then
+        if [ -d $RedHatReposDirBackup ] && [ ${VERIFICATION_BACKUPFILES} -eq 0 ]; then
+            CHOICE_BACKUP3=$(echo -e "\n${BOLD}└─ 检测到系统存在已备份的 repo 源文件，是否覆盖备份? [Y/n] ${PLAIN}")
+            read -p "${CHOICE_BACKUP3}" INPUT
             [ -z ${INPUT} ] && INPUT=Y
             case $INPUT in
             [Yy] | [Yy][Ee][Ss])
-                cp -rf $DebianSourceList $DebianSourceListBackup >/dev/null 2>&1
+                cp -rf $RedHatReposDir/* $RedHatReposDirBackup >/dev/null 2>&1
                 ;;
             [Nn] | [Nn][Oo]) ;;
             *)
@@ -258,13 +258,13 @@ function BackupMirrors(){
                 ;;
             esac
         else
-            cp -rf $DebianSourceList $DebianSourceListBackup >/dev/null 2>&1
-            echo -e "\n$COMPLETE 已备份原有 list 源文件至 $DebianSourceListBackup"
+            [ -d $RedHatReposDirBackup ] || mkdir -p $RedHatReposDirBackup
+            cp -rf $RedHatReposDir/* $RedHatReposDirBackup >/dev/null 2>&1
+            echo -e "\n$COMPLETE 已备份原有 repo 源文件至 $RedHatReposDirBackup 目录"
             sleep 1s
         fi
     else
-        [ -f $DebianSourceList ] || touch $DebianSourceList
-        echo -e ''
+        [ -d $RedHatReposDir ] || mkdir -p $RedHatReposDir
     fi
 
     ## /etc/apt/sources.list.d
@@ -299,7 +299,7 @@ function RemoveOldMirrorsFiles() {
 
 ## 更换国内源
 function ChangeMirrors() {
-    DebianMirrors
+    RedHatMirrors
     echo -e "\n${WORKING} 开始更新软件源...\n"
     apt-get update -y
     VERIFICATION_SOURCESYNC=$?
@@ -1277,15 +1277,15 @@ function UpgradeSoftware() {
     case $INPUT in
     [Yy] | [Yy][Ee][Ss])
         echo -e ''
-        apt-get upgrade -y
+        yum upgrade -y
         CHOICE_C=$(echo -e "\n${BOLD}└─ 是否清理已下载的软件包缓存? [Y/n] ${PLAIN}")
         read -p "${CHOICE_C}" INPUT
         [ -z ${INPUT} ] && INPUT=Y
         case $INPUT in
         [Yy] | [Yy][Ee][Ss])
            
-            apt-get autoremove -y >/dev/null 2>&1
-            apt-get clean >/dev/null 2>&1
+            yum autoremove -y >/dev/null 2>&1
+            yum clean packages -y >/dev/null 2>&1
            
             echo -e "\n$COMPLETE 清理完毕"
             ;;
