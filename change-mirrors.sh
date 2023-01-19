@@ -63,16 +63,21 @@ function InstallScript(){
         yum install -y unzip
     elif grep -Eqi "Fedora" /etc/issue || grep -Eq "Fedora" /etc/*-release; then
         OSNAME='fedora'
+        yum install -y unzip
     elif grep -Eqi "Rocky" /etc/issue || grep -Eq "Rocky" /etc/*-release; then
         OSNAME='rhel'
+        yum install -y unzip
     elif grep -Eqi "AlmaLinux" /etc/issue || grep -Eq "AlmaLinux" /etc/*-release; then
         OSNAME='rhel'
+        yum install -y unzip
     elif grep -Eqi "Amazon Linux" /etc/issue || grep -Eq "Amazon Linux" /etc/*-release; then
-        OSNAME='amazon'
+        OSNAME='rhel'
     elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
         OSNAME='debian'
+        apt install -y unzip
     elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
         OSNAME='debian'
+        apt install -y unzip
     else
         echo -e "\n$ERROR 无法判断当前运行环境，请先确认本脚本针对当前操作系统是否适配\n"
         exit
