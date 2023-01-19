@@ -20,26 +20,19 @@ WARN='[\033[33mWARN\033[0m]'
 ERROR='[\033[31mERROR\033[0m]'
 WORKING='[\033[34m*\033[0m]'
 
-
-DebianVersion=/etc/debian_version
-DebianSourceList=/etc/apt/sources.list
-DebianSourceListBackup=/etc/apt/sources.list.bak
-DebianExtendListDir=/etc/apt/sources.list.d
-DebianExtendListDirBackup=/etc/apt/sources.list.d.bak
-SYSTEM_UBUNTU="Ubuntu"
-SYSTEM_DEBIAN="Debian"
+SYSTEM_KALI="Kali"
+SYSTEM_REDHAT="RedHat"
+SYSTEM_RHEL="RedHat"
+SYSTEM_CENTOS="CentOS"
+SYSTEM_FEDORA="Fedora"
 
 LinuxRelease=/etc/os-release
 RedHatReposDir=/etc/yum.repos.d
 RedHatReposDirBackup=/etc/yum.repos.d.bak
 SelinuxConfig=/etc/selinux/config
 
-
 SYSTEM_NAME=$(cat $LinuxRelease | grep -E "^NAME=" | awk -F '=' '{print$2}' | sed "s/[\'\"]//g")
 SYSTEM_VERSION_NUMBER=$(cat /etc/os-release | grep -E "VERSION_ID=" | awk -F '=' '{print$2}' | sed "s/[\'\"]//g")
-DebianRelease="lsb_release"
-SYSTEM_JUDGMENT=$(${DebianRelease} -is)
-SYSTEM_VERSION=$(${DebianRelease} -cs)
 SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 
 
