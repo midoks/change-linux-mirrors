@@ -220,7 +220,7 @@ function ChooseMirrors() {
 
         IS_NO_EPEL=${SOURCE_NO_EPEL[$INPUT_KEY]}
         if [ "$IS_NO_EPEL" == "" ];then
-        	echo -e "\n${INPUT_KEY:2}源不支持EPEL！"  
+        	echo -e "\n${INPUT_KEY:2}源不支持EPEL！"
         	EPEL_INSTALL="False"
         else
         	if [ ${VERIFICATION_EPEL} -eq 0 ]; then
