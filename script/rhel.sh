@@ -222,6 +222,7 @@ function ChooseMirrors() {
         if [ "$IS_NO_EPEL" == "" ];then
         	echo -e "\n${IS_NO_EPEL}----2" 
         	echo -e "\n${INPUT_KEY:2}源不支持EPEL！"
+        	rm -rf RedHatReposDir
         	EPEL_INSTALL="False"
         else
         	echo -e "\n${IS_NO_EPEL}----1" 
