@@ -154,11 +154,9 @@ function ChooseMirrors() {
     cm_i=0
     for V in ${SOURCE_LIST_KEY[@]}; do
     num=`expr $cm_i + 1`
-	# echo -e " ❖   ${SOURCE_LIST_LANG[$cm_i]}              $num)"
 	AutoSizeStr "${V:2}" "$num"
 	cm_i=`expr $cm_i + 1`
 	done
-    # echo -e ' ❖   Debian官方              1)'
     echo -e ''
     echo -e '#####################################################'
     echo -e ''
@@ -1279,7 +1277,8 @@ function EPELMirrors() {
     ## 安装 EPEL 软件包
     if [ ${VERIFICATION_EPEL} -ne 0 ]; then
         echo -e "\n${WORKING} 安装 epel-release 软件包...\n"
-        yum install -y https://mirrors.aliyun.com/epel/epel-release-latest-${CENTOS_VERSION}.noarch.rpm
+        yum install -y epel-release
+        # yum install -y https://mirrors.aliyun.com/epel/epel-release-latest-${CENTOS_VERSION}.noarch.rpm
     fi
     ## 删除原有 EPEL 扩展 repo 源文件
     [ ${VERIFICATION_EPELFILES} -eq 0 ] && rm -rf $RedHatReposDir/epel*
