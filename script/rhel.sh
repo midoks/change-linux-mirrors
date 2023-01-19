@@ -40,7 +40,6 @@ SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 
 declare -A SOURCE_LIST
 
-SOURCE_LIST["a_CentOS官方"]="mirror.centos.org"
 SOURCE_LIST["a_LINODE"]="mirrors.linode.com"
 SOURCE_LIST["b_阿里云"]="mirrors.aliyun.com"
 SOURCE_LIST["b_阿里云[内网]"]="mirrors.cloud.aliyuncs.com"
