@@ -52,6 +52,9 @@ SOURCE_LIST["e_搜狐"]="mirrors.sohu.com"
 SOURCE_LIST["f_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
 SOURCE_LIST["f_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
+declare -A SOURCE_NO_EPEL
+SOURCE_NO_EPEL['a_LINODE']=1
+
 
 SOURCE_LIST_KEY_SORT_TMP=$(echo ${!SOURCE_LIST[@]} | tr ' ' '\n' | sort -n)
 SOURCE_LIST_KEY=(${SOURCE_LIST_KEY_SORT_TMP//'\n'/})
@@ -213,6 +216,10 @@ function ChooseMirrors() {
         ## 判断 /etc/yum.repos.d.bak 目录下是否存在 epel 扩展 repo 源文件
         [ -d $RedHatReposDirBackup ] && ls $RedHatReposDirBackup | grep epel -q
         VERIFICATION_EPELBACKUPFILES=$?
+
+
+        IS_NO_EPEL=${SOURCE_NO_EPEL[$INPUT_KEY]}
+        echo "IS_NO_EPEL:${IS_NO_EPEL}"
 
         if [ ${VERIFICATION_EPEL} -eq 0 ]; then
             CHOICE_D=$(echo -e "\n  ${BOLD}└─ 检测到系统已安装 EPEL 扩展源，是否替换/覆盖为国内源? [Y/n] ${PLAIN}")
