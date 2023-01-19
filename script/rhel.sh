@@ -1241,6 +1241,32 @@ function RedHatMirrors() {
     yum clean all >/dev/null 2>&1
 }
 
+
+## 安装/更换基于 RHEL/CentOS 的 EPEL (Extra Packages for Enterprise Linux) 扩展国内源
+function EPELMirrors() {
+    ## 安装 EPEL 软件包
+    if [ ${VERIFICATION_EPEL} -ne 0 ]; then
+        echo -e "\n${WORKING} 安装 epel-release 软件包...\n"
+        yum install -y https://mirrors.aliyun.com/epel/epel-release-latest-${CENTOS_VERSION}.noarch.rpm
+    fi
+    ## 删除原有 EPEL 扩展 repo 源文件
+    [ ${VERIFICATION_EPELFILES} -eq 0 ] && rm -rf $RedHatReposDir/epel*
+    [ ${VERIFICATION_EPELBACKUPFILES} -eq 0 ] && rm -rf $RedHatReposDirBackup/epel*
+    ## 生成官方 EPEL 扩展 repo 源文件
+    EPELReposCreate
+    ## 更换国内源
+    sed -i 's|^metalink=|#metalink=|g' $RedHatReposDir/epel*
+    case ${CENTOS_VERSION} in
+    8)
+        sed -i "s|^#baseurl=https|baseurl=${WEB_PROTOCOL}|g" $RedHatReposDir/epel*
+        ;;
+    7)
+        sed -i "s|^#baseurl=http|baseurl=${WEB_PROTOCOL}|g" $RedHatReposDir/epel*
+        ;;
+    esac
+    sed -i "s|download.fedoraproject.org/pub|${SOURCE}|g" $RedHatReposDir/epel*
+    rm -rf $RedHatReposDir/epel*rpmnew
+}
 ## 更新软件包
 function UpgradeSoftware() {
     CHOICE_B=$(echo -e "\n${BOLD}└─ 是否更新软件包? [Y/n] ${PLAIN}")
