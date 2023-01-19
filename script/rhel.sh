@@ -54,6 +54,7 @@ SOURCE_LIST["f_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
 declare -A SOURCE_NO_EPEL
 SOURCE_NO_EPEL['a_LINODE']=1
+SOURCE_NO_EPEL["e_网易"]=1
 
 
 SOURCE_LIST_KEY_SORT_TMP=$(echo ${!SOURCE_LIST[@]} | tr ' ' '\n' | sort -n)
