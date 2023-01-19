@@ -76,11 +76,7 @@ function RemoveScript(){
 function InstallScript(){
     sleep 1
     clear
-    _os=`uname`
-    echo "use system: ${_os}"
-    if [ ${_os} == "Darwin" ]; then
-        OSNAME='macos'
-    elif grep -Eq "openSUSE" /etc/*-release; then
+    if grep -Eq "openSUSE" /etc/*-release; then
         OSNAME='opensuse'
     elif grep -Eq "FreeBSD" /etc/*-release; then
         OSNAME='freebsd'
@@ -97,7 +93,7 @@ function InstallScript(){
     elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
         OSNAME='debian'
     elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
-        OSNAME='ubuntu'
+        OSNAME='debian'
     else
         echo -e "\n$ERROR 无法判断当前运行环境，请先确认本脚本针对当前操作系统是否适配\n"
         exit
