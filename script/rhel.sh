@@ -271,8 +271,9 @@ function RemoveOldMirrorsFiles() {
 ## 更换国内源
 function ChangeMirrors() {
     RedHatMirrors
-    echo -e "\n${WORKING} 开始更新软件源...\n"
-    apt-get update -y
+    SYNC_TXT="同步"
+    echo -e "\n${WORKING} 开始${SYNC_TXT}软件源...\n"
+    yum makecache -y
     VERIFICATION_SOURCESYNC=$?
     if [ ${VERIFICATION_SOURCESYNC} -eq 0 ]; then
         echo -e "\n$COMPLETE 软件源更换完毕"
