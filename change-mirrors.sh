@@ -60,6 +60,7 @@ function InstallScript(){
         OSNAME='freebsd'
     elif grep -Eqi "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
         OSNAME='rhel'
+        yum install -y unzip
     elif grep -Eqi "Fedora" /etc/issue || grep -Eq "Fedora" /etc/*-release; then
         OSNAME='fedora'
     elif grep -Eqi "Rocky" /etc/issue || grep -Eq "Rocky" /etc/*-release; then
