@@ -86,9 +86,9 @@ function InstallScript(){
 
     script_file=/tmp/change-linux-mirrors-main/script/${OSNAME}.sh
     echo $script_file
-    if [ -f $script_file ];then
-        bash $script_file
-    fi
+    # if [ -f $script_file ];then
+    bash $script_file
+    # fi
 }
 
 
