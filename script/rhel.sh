@@ -203,7 +203,40 @@ function ChooseMirrors() {
     INPUT_KEY=${SOURCE_LIST_KEY[$INPUT]}
     SOURCE=${SOURCE_LIST[$INPUT_KEY]}
 
-	echo -e "\n将使用 ${BLUE}${INPUT_KEY:2}${PLAIN} 作为源！"    
+	echo -e "\n将使用 ${BLUE}${INPUT_KEY:2}${PLAIN} 作为源！"  
+
+	## 更换基于 RHEL/CentOS 的 EPEL (Extra Packages for Enterprise Linux) 扩展国内源
+    if [ ${SYSTEM_JUDGMENT} = ${SYSTEM_CENTOS} -o ${SYSTEM_JUDGMENT} = ${SYSTEM_RHEL} ]; then
+        ## 判断是否已安装 EPEL 软件包
+        rpm -qa | grep epel-release -q
+        VERIFICATION_EPEL=$?
+        ## 判断 /etc/yum.repos.d 目录下是否存在 epel 扩展 repo 源文件
+        [ -d $RedHatReposDir ] && ls $RedHatReposDir | grep epel -q
+        VERIFICATION_EPELFILES=$?
+        ## 判断 /etc/yum.repos.d.bak 目录下是否存在 epel 扩展 repo 源文件
+        [ -d $RedHatReposDirBackup ] && ls $RedHatReposDirBackup | grep epel -q
+        VERIFICATION_EPELBACKUPFILES=$?
+
+        if [ ${VERIFICATION_EPEL} -eq 0 ]; then
+            CHOICE_D=$(echo -e "\n  ${BOLD}└─ 检测到系统已安装 EPEL 扩展源，是否替换/覆盖为国内源? [Y/n] ${PLAIN}")
+        else
+            CHOICE_D=$(echo -e "\n  ${BOLD}└─ 是否安装 EPEL 扩展源? [Y/n] ${PLAIN}")
+        fi
+        read -p "${CHOICE_D}" INPUT
+        [ -z ${INPUT} ] && INPUT=Y
+        case $INPUT in
+        [Yy] | [Yy][Ee][Ss])
+            EPEL_INSTALL="True"
+            ;;
+        [Nn] | [Nn][Oo])
+            EPEL_INSTALL="False"
+            ;;
+        *)
+            echo -e "\n  $WARN 输入错误，默认不更换！"
+            EPEL_INSTALL="False"
+            ;;
+        esac
+    fi  
 
     ## 选择同步软件源所使用的 WEB 协议（ HTTP：80 端口，HTTPS：443 端口）
     if [[ ${NOT_SUPPORT_HTTPS} == "True" ]]; then
