@@ -220,9 +220,11 @@ function ChooseMirrors() {
 
         IS_NO_EPEL=${SOURCE_NO_EPEL[$INPUT_KEY]}
         if [ "$IS_NO_EPEL" == "" ];then
+        	echo -e "\n${IS_NO_EPEL}----2" 
         	echo -e "\n${INPUT_KEY:2}源不支持EPEL！"
         	EPEL_INSTALL="False"
         else
+        	echo -e "\n${IS_NO_EPEL}----1" 
         	if [ ${VERIFICATION_EPEL} -eq 0 ]; then
 	            CHOICE_D=$(echo -e "\n  ${BOLD}└─ 检测到系统已安装 EPEL 扩展源，是否替换/覆盖为国内源? [Y/n] ${PLAIN}")
 	        else
