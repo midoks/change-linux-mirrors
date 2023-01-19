@@ -261,30 +261,6 @@ function BackupMirrors(){
     else
         [ -d $RedHatReposDir ] || mkdir -p $RedHatReposDir
     fi
-
-    ## /etc/apt/sources.list.d
-    if [ -d $DebianExtendListDir ] && [ ${VERIFICATION_FILES} -eq 0 ]; then
-        if [ -d $DebianExtendListDirBackup ] && [ ${VERIFICATION_BACKUPFILES} -eq 0 ]; then
-            CHOICE_BACKUP2=$(echo -e "\n${BOLD}└─ 检测到系统存在已备份的 list 第三方源文件，是否覆盖备份? [Y/n] ${PLAIN}")
-            read -p "${CHOICE_BACKUP2}" INPUT
-            [ -z ${INPUT} ] && INPUT=Y
-            case $INPUT in
-            [Yy] | [Yy][Ee][Ss])
-                cp -rf $DebianExtendListDir/* $DebianExtendListDirBackup >/dev/null 2>&1
-                ;;
-            [Nn] | [Nn][Oo]) ;;
-            *)
-                echo -e "\n$WARN 输入错误，默认不覆盖！"
-                ;;
-            esac
-        else
-            [ -d $DebianExtendListDirBackup ] || mkdir -p $DebianExtendListDirBackup
-            cp -rf $DebianExtendListDir/* $DebianExtendListDirBackup >/dev/null 2>&1
-            echo -e "$COMPLETE 已备份原有 list 第三方源文件至 $DebianExtendListDirBackup 目录"
-            sleep 1s
-        fi
-    fi
-  
 }
 
 ## 删除原有源
