@@ -47,7 +47,8 @@ elif [ "$SOURCE_BRANCH" == "ubuntu" ];
     SOURCE_LIST["a_Debian官方"]="deb.debian.org"
     SOURCE_BRANCH=debian
 else
-    echo ""
+    echo -e "\n$ERROR 无法判断当前运行环境，请先确认本脚本针对当前操作系统是否适配\n"
+    exit
 fi
 
 SOURCE_LIST["a_Debian官方[中国]"]="ftp.cn.debian.org"
