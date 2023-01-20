@@ -43,7 +43,7 @@ declare -A SOURCE_LIST
 
 if [ "$SOURCE_BRANCH" == "debian" ];then
     SOURCE_LIST["a_Debian官方"]="deb.debian.org"
-elif [ "$SOURCE_BRANCH" == "ubuntu" ];
+elif [ "$SOURCE_BRANCH" == "ubuntu" ];then
     SOURCE_LIST["a_Debian官方"]="deb.debian.org"
     SOURCE_BRANCH=debian
 else
