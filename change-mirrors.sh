@@ -62,7 +62,7 @@ function InstallScript(){
         OSNAME='rhel'
         yum install -y unzip
     elif grep -Eqi "Fedora" /etc/issue || grep -Eq "Fedora" /etc/*-release; then
-        OSNAME='fedora'
+        OSNAME='rhel'
         yum install -y unzip
     elif grep -Eqi "Rocky" /etc/issue || grep -Eq "Rocky" /etc/*-release; then
         OSNAME='rhel'
