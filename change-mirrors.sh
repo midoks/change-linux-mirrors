@@ -74,9 +74,11 @@ function InstallScript(){
         OSNAME='rhel'
     elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
         OSNAME='debian'
+        apt update -y
         apt install -y unzip
     elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
         OSNAME='debian'
+        apt update -y
         apt install -y unzip
     else
         echo -e "\n$ERROR 无法判断当前运行环境，请先确认本脚本针对当前操作系统是否适配\n"
