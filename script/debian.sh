@@ -218,6 +218,7 @@ function ChooseMirrors() {
 
     INPUT=`expr $INPUT - 1`
 
+    #debian官方源,要一致
     if [ "$INPUT" == "0" ];then
         SOURCE_BRANCH=debian
     fi
