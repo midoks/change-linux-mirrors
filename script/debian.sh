@@ -43,8 +43,9 @@ declare -A SOURCE_LIST
 
 if [ "$SOURCE_BRANCH" == "debian" ];then
     SOURCE_LIST["a_Debian官方"]="deb.debian.org"
-else
-    echo ""
+elif [ "$SOURCE_BRANCH" == "ubuntu" ];
+    SOURCE_LIST["a_Debian官方"]="deb.debian.org"
+    SOURCE_BRANCH=debian
 fi
 
 SOURCE_LIST["a_Debian官方[中国]"]="ftp.cn.debian.org"
