@@ -45,7 +45,6 @@ if [ "$SOURCE_BRANCH" == "debian" ];then
     SOURCE_LIST["a_Debian官方"]="deb.debian.org"
 elif [ "$SOURCE_BRANCH" == "ubuntu" ];then
     SOURCE_LIST["a_Debian官方"]="deb.debian.org"
-    SOURCE_BRANCH=debian
 else
     echo -e "\n$ERROR 无法判断当前运行环境，请先确认本脚本针对当前操作系统是否适配\n"
     exit
@@ -218,6 +217,11 @@ function ChooseMirrors() {
 	fi
 
     INPUT=`expr $INPUT - 1`
+
+    if [ "$INPUT" == "0" ];then
+        SOURCE_BRANCH=debian
+    fi
+
     INPUT_KEY=${SOURCE_LIST_KEY[$INPUT]}
     SOURCE=${SOURCE_LIST[$INPUT_KEY]}
 
