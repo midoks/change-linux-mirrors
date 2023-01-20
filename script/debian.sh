@@ -153,6 +153,10 @@ function AutoSizeStr(){
 	echo -e " ❖   ${1}${FIX_SPACE}${2})"
 }
 
+function AutoSpeedTestChoose(){
+
+}
+
 ## 选择官方源
 function ChooseMirrors() {
     clear
@@ -178,8 +182,9 @@ function ChooseMirrors() {
 	# echo -e " ❖   ${SOURCE_LIST_LANG[$cm_i]}              $num)"
 	AutoSizeStr "${V:2}" "$num"
 	cm_i=`expr $cm_i + 1`
-    AutoSizeStr "自动测速选择" "0/空)"
+    
 	done
+    AutoSizeStr "自动测速选择" "0/空)"
     # echo -e ' ❖   Debian官方              1)'
     echo -e ''
     echo -e '#####################################################'
@@ -193,6 +198,7 @@ function ChooseMirrors() {
     read -p "${CHOICE_A}" INPUT
     if [ "$INPUT" == "" ];then
     	INPUT=1
+        AutoSpeedTestChoose
     fi
 
     expr $INPUT "+" 10 &> /dev/null
