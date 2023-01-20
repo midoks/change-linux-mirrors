@@ -154,7 +154,9 @@ function AutoSizeStr(){
 }
 
 function AutoSpeedTestChoose(){
-    echo "11"
+    for V in ${SOURCE_LIST_KEY[@]}; do
+        echo $V
+    done
 }
 
 ## 选择官方源
