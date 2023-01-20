@@ -54,6 +54,7 @@ fi
 # ping ftp.jaist.ac.jp -c 4
 # ping mirrors.linode.com -c 4
 # ping mirrors.linode.com -c 4 |grep "loss, time" | awk '{print $10}'
+# ping mirrors.linode.com -c 4 |grep "loss, time" | awk '{print $10}' | awk -F "ms" '{print $1}'
 SOURCE_LIST["b_LINODE"]="mirrors.linode.com"
 SOURCE_LIST["b_麻省理工学院MIT"]="mirrors.mit.edu"
 SOURCE_LIST["b_俄罗斯"]="ftp.jaist.ac.jp/pub/Linux"
@@ -155,7 +156,9 @@ function AutoSizeStr(){
 
 function AutoSpeedTestChoose(){
     for V in ${SOURCE_LIST_KEY[@]}; do
-        echo $V ${SOURCE_LIST[$V]}
+        TMP_URL=${SOURCE_LIST[$V]}
+        TMP_TIME=`ping $TMP_URL -c 3 |grep "loss, time" | awk '{print $10}' | awk -F "ms" '{print $1}'`
+        AutoSizeStr ${TMP_URL} ${TMP_TIME}
     done
 }
 
