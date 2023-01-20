@@ -43,29 +43,29 @@ declare -A SOURCE_LIST
 
 if [ "$SOURCE_BRANCH" == "debian" ];then
     SOURCE_LIST["a_Debian官方"]="deb.debian.org"
+    SOURCE_LIST["a_Debian官方[中国]"]="ftp.cn.debian.org"
 elif [ "$SOURCE_BRANCH" == "ubuntu" ];then
     SOURCE_LIST["a_Debian官方"]="deb.debian.org"
-    SOURCE_LIST["0_Ubuntu官方"]="archive.ubuntu.com"
+    SOURCE_LIST["a_Ubuntu官方"]="archive.ubuntu.com"
 else
     echo -e "\n$ERROR 无法判断当前运行环境，请先确认本脚本针对当前操作系统是否适配\n"
     exit
 fi
 
-SOURCE_LIST["a_Debian官方[中国]"]="ftp.cn.debian.org"
-SOURCE_LIST["a_LINODE"]="mirrors.linode.com"
-SOURCE_LIST["a_麻省理工学院MIT"]="mirrors.mit.edu"
-SOURCE_LIST["a_俄罗斯"]="ftp.jaist.ac.jp/pub/Linux"
-SOURCE_LIST["a_俄勒冈州立大学"]="ftp.osuosl.org/pub/debian"
-SOURCE_LIST["b_阿里云"]="mirrors.aliyun.com"
-SOURCE_LIST["b_阿里云[内网]"]="mirrors.cloud.aliyuncs.com"
-SOURCE_LIST["c_腾讯云"]="mirrors.tencent.com"
-SOURCE_LIST["c_腾讯云[内网]"]="mirrors.tencentyun.com"
-SOURCE_LIST["d_华为云"]="repo.huaweicloud.com"
-SOURCE_LIST["d_华为云[内网]"]="mirrors.myhuaweicloud.com"
-SOURCE_LIST["e_网易"]="mirrors.163.com"
-SOURCE_LIST["e_搜狐"]="mirrors.sohu.com"
-SOURCE_LIST["f_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
-SOURCE_LIST["f_中国科学技术大学"]="mirrors.ustc.edu.cn"
+SOURCE_LIST["b_LINODE"]="mirrors.linode.com"
+SOURCE_LIST["b_麻省理工学院MIT"]="mirrors.mit.edu"
+SOURCE_LIST["b_俄罗斯"]="ftp.jaist.ac.jp/pub/Linux"
+SOURCE_LIST["b_俄勒冈州立大学"]="ftp.osuosl.org/pub/debian"
+SOURCE_LIST["d_阿里云"]="mirrors.aliyun.com"
+SOURCE_LIST["d_阿里云[内网]"]="mirrors.cloud.aliyuncs.com"
+SOURCE_LIST["e_腾讯云"]="mirrors.tencent.com"
+SOURCE_LIST["e_腾讯云[内网]"]="mirrors.tencentyun.com"
+SOURCE_LIST["f_华为云"]="repo.huaweicloud.com"
+SOURCE_LIST["f_华为云[内网]"]="mirrors.myhuaweicloud.com"
+SOURCE_LIST["g_网易"]="mirrors.163.com"
+SOURCE_LIST["g_搜狐"]="mirrors.sohu.com"
+SOURCE_LIST["g_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
+SOURCE_LIST["g_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
 
 SOURCE_LIST_KEY_SORT_TMP=$(echo ${!SOURCE_LIST[@]} | tr ' ' '\n' | sort -n)
