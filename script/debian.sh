@@ -43,6 +43,8 @@ declare -A SOURCE_LIST
 SOURCE_LIST["a_Debian官方"]="deb.debian.org"
 SOURCE_LIST["a_Debian官方[中国]"]="ftp.cn.debian.org"
 SOURCE_LIST["a_LINODE"]="mirrors.linode.com"
+SOURCE_LIST["a_麻省理工学院MIT"]="mirrors.mit.edu"
+# SOURCE_LIST["a_俄罗斯"]="ftp.kddilabs.jp"
 SOURCE_LIST["b_阿里云"]="mirrors.aliyun.com"
 SOURCE_LIST["b_阿里云[内网]"]="mirrors.cloud.aliyuncs.com"
 SOURCE_LIST["c_腾讯云"]="mirrors.tencent.com"
