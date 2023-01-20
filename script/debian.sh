@@ -155,7 +155,7 @@ function AutoSizeStr(){
 
 function AutoSpeedTestChoose(){
     for V in ${SOURCE_LIST_KEY[@]}; do
-        echo $V ${SOURCE_LIST_KEY[$V]}
+        echo $V ${SOURCE_LIST[$V]}
     done
 }
 
