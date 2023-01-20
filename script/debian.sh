@@ -45,7 +45,7 @@ if [ "$SOURCE_BRANCH" == "debian" ];then
     SOURCE_LIST["a_Debian官方"]="deb.debian.org"
 elif [ "$SOURCE_BRANCH" == "ubuntu" ];then
     SOURCE_LIST["a_Debian官方"]="deb.debian.org"
-    SOURCE_LIST["a_Ubuntu官方"]="archive.ubuntu.com"
+    SOURCE_LIST["0_Ubuntu官方"]="archive.ubuntu.com"
 else
     echo -e "\n$ERROR 无法判断当前运行环境，请先确认本脚本针对当前操作系统是否适配\n"
     exit
