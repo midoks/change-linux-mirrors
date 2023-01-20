@@ -154,7 +154,7 @@ function AutoSizeStr(){
 }
 
 function AutoSpeedTestChoose(){
-
+    echo "11"
 }
 
 ## 选择官方源
