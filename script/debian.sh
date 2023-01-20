@@ -158,7 +158,7 @@ function AutoSpeedTestChoose(){
     for V in ${SOURCE_LIST_KEY[@]}; do
         TMP_URL=${SOURCE_LIST[$V]}
         TMP_URL=`echo $TMP_URL | awk -F '/' '{print $1}'`
-        TMP_TIME=`ping $TMP_URL -c 3 |grep "loss, time" | awk '{print $10}' | awk -F "ms" '{print $1}'`
+        TMP_TIME=`ping $TMP_URL -c 3 |grep "loss, time" | awk '{print $10}' | awk -F "ms" '{print $1}' 2>&`
         if [ "${TMP_TIME}" != "" ];then
             AutoSizeStr "${TMP_URL}" "${TMP_TIME}ms"
         fi
