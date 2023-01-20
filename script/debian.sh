@@ -51,6 +51,9 @@ else
     exit
 fi
 
+# ping ftp.jaist.ac.jp -c 4
+# ping mirrors.linode.com -c 4
+# ping mirrors.linode.com -c 4 |grep "loss, time" | awk '{print $10}'
 SOURCE_LIST["b_LINODE"]="mirrors.linode.com"
 SOURCE_LIST["b_麻省理工学院MIT"]="mirrors.mit.edu"
 SOURCE_LIST["b_俄罗斯"]="ftp.jaist.ac.jp/pub/Linux"
@@ -175,6 +178,7 @@ function ChooseMirrors() {
 	# echo -e " ❖   ${SOURCE_LIST_LANG[$cm_i]}              $num)"
 	AutoSizeStr "${V:2}" "$num"
 	cm_i=`expr $cm_i + 1`
+    AutoSizeStr "自动测速选择" "0/空)"
 	done
     # echo -e ' ❖   Debian官方              1)'
     echo -e ''
