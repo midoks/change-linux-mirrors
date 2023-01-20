@@ -40,17 +40,20 @@ SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 
 declare -A SOURCE_LIST
 
-SOURCE_LIST["a_LINODE"]="mirrors.linode.com"
-SOURCE_LIST["b_阿里云"]="mirrors.aliyun.com"
-SOURCE_LIST["b_阿里云[内网]"]="mirrors.cloud.aliyuncs.com"
-SOURCE_LIST["c_腾讯云"]="mirrors.tencent.com"
-SOURCE_LIST["c_腾讯云[内网]"]="mirrors.tencentyun.com"
-SOURCE_LIST["d_华为云"]="repo.huaweicloud.com"
-SOURCE_LIST["d_华为云[内网]"]="mirrors.myhuaweicloud.com"
-SOURCE_LIST["e_网易"]="mirrors.163.com"
-SOURCE_LIST["e_搜狐"]="mirrors.sohu.com"
-SOURCE_LIST["f_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
-SOURCE_LIST["f_中国科学技术大学"]="mirrors.ustc.edu.cn"
+SOURCE_LIST["b_LINODE"]="mirrors.linode.com"
+SOURCE_LIST["b_麻省理工学院MIT"]="mirrors.mit.edu"
+SOURCE_LIST["b_俄罗斯"]="ftp.jaist.ac.jp/pub/Linux"
+SOURCE_LIST["b_俄勒冈州立大学"]="ftp.osuosl.org/pub/debian"
+SOURCE_LIST["d_阿里云"]="mirrors.aliyun.com"
+SOURCE_LIST["d_阿里云[内网]"]="mirrors.cloud.aliyuncs.com"
+SOURCE_LIST["e_腾讯云"]="mirrors.tencent.com"
+SOURCE_LIST["e_腾讯云[内网]"]="mirrors.tencentyun.com"
+SOURCE_LIST["f_华为云"]="repo.huaweicloud.com"
+SOURCE_LIST["f_华为云[内网]"]="mirrors.myhuaweicloud.com"
+SOURCE_LIST["g_网易"]="mirrors.163.com"
+SOURCE_LIST["g_搜狐"]="mirrors.sohu.com"
+SOURCE_LIST["g_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
+SOURCE_LIST["g_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
 declare -A SOURCE_NO_EPEL
 SOURCE_NO_EPEL['a_LINODE']=1
