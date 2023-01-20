@@ -40,7 +40,13 @@ SOURCE_BRANCH=${SYSTEM_JUDGMENT,,}
 
 declare -A SOURCE_LIST
 
-SOURCE_LIST["a_Debian官方"]="deb.debian.org"
+
+if [ "$SOURCE_BRANCH" == "debian" ];then
+    SOURCE_LIST["a_Debian官方"]="deb.debian.org"
+else
+    echo ""
+fi
+
 SOURCE_LIST["a_Debian官方[中国]"]="ftp.cn.debian.org"
 SOURCE_LIST["a_LINODE"]="mirrors.linode.com"
 SOURCE_LIST["a_麻省理工学院MIT"]="mirrors.mit.edu"
