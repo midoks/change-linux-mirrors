@@ -184,7 +184,7 @@ function ChooseMirrors() {
 	cm_i=`expr $cm_i + 1`
     
 	done
-    AutoSizeStr "自动测速选择" "0/空)"
+    AutoSizeStr "自动测速选择" "0/空"
     # echo -e ' ❖   Debian官方              1)'
     echo -e ''
     echo -e '#####################################################'
