@@ -43,7 +43,7 @@ declare -A SOURCE_LIST
 SOURCE_LIST["b_LINODE"]="mirrors.linode.com"
 SOURCE_LIST["b_麻省理工学院MIT"]="mirrors.mit.edu"
 SOURCE_LIST["b_俄罗斯"]="ftp.jaist.ac.jp/pub/Linux"
-SOURCE_LIST["b_俄勒冈州立大学"]="ftp.osuosl.org/pub/debian"
+SOURCE_LIST["b_俄勒冈州立大学"]="ftp.osuosl.org/pub"
 SOURCE_LIST["d_阿里云"]="mirrors.aliyun.com"
 SOURCE_LIST["d_阿里云[内网]"]="mirrors.cloud.aliyuncs.com"
 SOURCE_LIST["e_腾讯云"]="mirrors.tencent.com"
