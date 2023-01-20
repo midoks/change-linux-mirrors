@@ -309,7 +309,13 @@ function BackupMirrors(){
 
 ## 删除原有源
 function RemoveOldMirrorsFiles() {
-    [ -f $DebianSourceList ] && sed -i '1,$d' $DebianSourceList
+    if [ -d $RedHatReposDir ]; then
+        if [ -f $RedHatReposDir/epel.repo ]; then
+            ls $RedHatReposDir/ | egrep -v epel | xargs rm -rf
+        else
+            rm -rf $RedHatReposDir/*
+        fi
+    fi
 }
 
 ## 更换国内源
