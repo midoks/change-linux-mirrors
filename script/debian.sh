@@ -214,7 +214,7 @@ function ChooseMirrors() {
     if [ "$INPUT" == "" ];then
     	INPUT=1
         AutoSpeedTestChoose
-        echo -e "\n$BLUE 开始自动选择${PLAIN}]！"
+        echo -e "\n$GREEN 开始自动选择${PLAIN}！"
         INPUT_KEY=`expr $INPUT - 1`
         echo -e "\n 自动选在最近节点[${BLUE}${INPUT_KEY:2}${PLAIN}]作为源！"
     fi
