@@ -73,9 +73,9 @@ SOURCE_LIST["g_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
 
 declare -A SOURCE_INTERNET_NODE
-SOURCE_INTERNET_NODE["d_阿里云[内网]"]=1
-SOURCE_INTERNET_NODE["e_腾讯云[内网]"]=1
-SOURCE_INTERNET_NODE["f_华为云[内网]"]=1
+SOURCE_INTERNET_NODE["d_阿里云[内网]"]="1"
+SOURCE_INTERNET_NODE["e_腾讯云[内网]"]="1"
+SOURCE_INTERNET_NODE["f_华为云[内网]"]="1"
 
 
 SOURCE_LIST_KEY_SORT_TMP=$(echo ${!SOURCE_LIST[@]} | tr ' ' '\n' | sort -n)
@@ -167,7 +167,7 @@ function AutoSpeedTestChoose(){
     for V in ${SOURCE_LIST_KEY[@]}; do
         AUTO_TMP_INPUT=`expr $AUTO_TMP_INPUT + 1`
         echo "aa - v${SOURCE_INTERNET_NODE[$V]}vv $V"
-        if [ "$SOURCE_INTERNET_NODE[$V]" == "1" ]; then
+        if [ "${SOURCE_INTERNET_NODE[$V]}" == "1" ]; then
             continue
         fi
 
