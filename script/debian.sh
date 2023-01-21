@@ -170,6 +170,7 @@ function AutoSpeedTestChoose(){
         TMP_TIME=`ping $TMP_URL -c 3 |grep "loss, time" | awk '{print $10}' | awk -F "ms" '{print $1}' 2>1&`
         AUTO_TMP_INPUT=`expr $AUTO_TMP_INPUT + 1`
 
+        echo "$SOURCE_INTERNET_NODE[$V] $V"
         if [ "$SOURCE_INTERNET_NODE[$V]" == "1" ]; then
             continue
         fi
@@ -227,7 +228,6 @@ function ChooseMirrors() {
     	INPUT=1
         echo -e "\n$GREEN 开始自动选择！${PLAIN}"
         AutoSpeedTestChoose
-        echo -e "\n 自动选择:$GREEN${INPUT}${PLAIN}"
         TMP_INPUT=`expr $INPUT - 1`
         INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
         echo -e "\n 自动选在最近节点[${BLUE}${INPUT_KEY:2}${PLAIN}]作为源！"
