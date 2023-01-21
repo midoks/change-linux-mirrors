@@ -165,15 +165,14 @@ function AutoSpeedTestChoose(){
     TIME_USE=100000
     AUTO_TMP_INPUT=1
     for V in ${SOURCE_LIST_KEY[@]}; do
+        if [ "$SOURCE_INTERNET_NODE[$V]" == "1" ]; then
+            continue
+        fi
+
         TMP_URL=${SOURCE_LIST[$V]}
         TMP_URL=`echo $TMP_URL | awk -F '/' '{print $1}'`
         TMP_TIME=`ping $TMP_URL -c 3 |grep "loss, time" | awk '{print $10}' | awk -F "ms" '{print $1}' 2>1&`
         AUTO_TMP_INPUT=`expr $AUTO_TMP_INPUT + 1`
-
-        echo "$SOURCE_INTERNET_NODE[$V] $V"
-        if [ "$SOURCE_INTERNET_NODE[$V]" == "1" ]; then
-            continue
-        fi
 
         if [ "${TMP_TIME}" != "" ];then
             AutoSizeStr "${TMP_URL}" "${TMP_TIME}ms"
