@@ -71,6 +71,8 @@ SOURCE_LIST["g_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
 SOURCE_LIST["g_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
 
+
+declare -A SOURCE_INTERNET_NODE
 SOURCE_INTERNET_NODE["d_阿里云[内网]"]=1
 SOURCE_INTERNET_NODE["e_腾讯云[内网]"]=1
 SOURCE_INTERNET_NODE["f_华为云[内网]"]=1
