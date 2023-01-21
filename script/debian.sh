@@ -71,6 +71,11 @@ SOURCE_LIST["g_清华大学"]="mirrors.tuna.tsinghua.edu.cn"
 SOURCE_LIST["g_中国科学技术大学"]="mirrors.ustc.edu.cn"
 
 
+SOURCE_INTERNET_NODE["d_阿里云[内网]"]=1
+SOURCE_INTERNET_NODE["e_腾讯云[内网]"]=1
+SOURCE_INTERNET_NODE["f_华为云[内网]"]=1
+
+
 SOURCE_LIST_KEY_SORT_TMP=$(echo ${!SOURCE_LIST[@]} | tr ' ' '\n' | sort -n)
 SOURCE_LIST_KEY=(${SOURCE_LIST_KEY_SORT_TMP//'\n'/})
 SOURCE_LIST_LEN=${#SOURCE_LIST[*]}
@@ -162,6 +167,11 @@ function AutoSpeedTestChoose(){
         TMP_URL=`echo $TMP_URL | awk -F '/' '{print $1}'`
         TMP_TIME=`ping $TMP_URL -c 3 |grep "loss, time" | awk '{print $10}' | awk -F "ms" '{print $1}' 2>1&`
         AUTO_TMP_INPUT=`expr $AUTO_TMP_INPUT + 1`
+
+        if [ "$SOURCE_INTERNET_NODE[$V]" == "1" ]; then
+            continue
+        fi
+
         if [ "${TMP_TIME}" != "" ];then
             AutoSizeStr "${TMP_URL}" "${TMP_TIME}ms"
             if [ "${TMP_TIME}" -lt "${TIME_USE}" ];then
