@@ -140,6 +140,30 @@ function AutoSizeStr(){
 	echo -e " ❖   ${1}${FIX_SPACE}${2})"
 }
 
+function AutoSpeedTestChoose(){
+    TIME_USE=100000
+    AUTO_TMP_INPUT=1
+    for V in ${SOURCE_LIST_KEY[@]}; do
+        AUTO_TMP_INPUT=`expr $AUTO_TMP_INPUT + 1`
+        if [ "${SOURCE_INTERNET_NODE[$V]}" == "1" ]; then
+            continue
+        fi
+
+        TMP_URL=${SOURCE_LIST[$V]}
+        TMP_URL=`echo $TMP_URL | awk -F '/' '{print $1}'`
+        TMP_TIME=`ping $TMP_URL -c 3 |grep "loss, time" | awk '{print $10}' | awk -F "ms" '{print $1}' 2>1&`
+        
+
+        if [ "${TMP_TIME}" != "" ];then
+            AutoSizeStr "${TMP_URL}" "${TMP_TIME}ms"
+            if [ "${TMP_TIME}" -lt "${TIME_USE}" ];then
+                TIME_USE=$TMP_TIME
+                INPUT=$AUTO_TMP_INPUT
+            fi
+        fi
+    done
+}
+
 ## 选择官方源
 function ChooseMirrors() {
     clear
@@ -176,7 +200,12 @@ function ChooseMirrors() {
 
     read -p "${CHOICE_A}" INPUT
     if [ "$INPUT" == "" ];then
-    	INPUT=1
+        INPUT=1
+        echo -e "\n$GREEN 开始自动选择！${PLAIN}"
+        AutoSpeedTestChoose
+        TMP_INPUT=`expr $INPUT - 1`
+        INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
+        echo -e "\n 自动选在最近节点[${BLUE}${INPUT_KEY:2}${PLAIN}]作为源！"
     fi
 
     expr $INPUT "+" 10 &> /dev/null

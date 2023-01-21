@@ -166,7 +166,6 @@ function AutoSpeedTestChoose(){
     AUTO_TMP_INPUT=1
     for V in ${SOURCE_LIST_KEY[@]}; do
         AUTO_TMP_INPUT=`expr $AUTO_TMP_INPUT + 1`
-        echo "aa - v${SOURCE_INTERNET_NODE[$V]}vv $V"
         if [ "${SOURCE_INTERNET_NODE[$V]}" == "1" ]; then
             continue
         fi
