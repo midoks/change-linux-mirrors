@@ -8,6 +8,12 @@
 bash <(curl -sSL https://raw.githubusercontent.com/midoks/change-linux-mirrors/main/change-mirrors.sh)
 ```
 
+- Docker
+
+```
+bash <(curl -sSL https://raw.githubusercontent.com/midoks/change-linux-mirrors/main/docker.sh)
+```
+
 
 ### Stargazers over time
 
