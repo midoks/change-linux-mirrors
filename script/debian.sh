@@ -228,7 +228,8 @@ function ChooseMirrors() {
         echo -e "\n$GREEN 开始自动选择！${PLAIN}"
         AutoSpeedTestChoose
         echo -e "\n 自动选择:$GREEN${INPUT}${PLAIN}"
-        INPUT_KEY=`expr $INPUT - 1`
+        TMP_INPUT=`expr $INPUT - 1`
+        INPUT_KEY=${SOURCE_LIST_KEY[$TMP_INPUT]}
         echo -e "\n 自动选在最近节点[${BLUE}${INPUT_KEY:2}${PLAIN}]作为源！"
     fi
 
