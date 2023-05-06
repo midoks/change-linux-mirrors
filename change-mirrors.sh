@@ -54,29 +54,29 @@ function RemoveScript(){
 function InstallScript(){
     sleep 1
     clear
-    if grep -Eq "openSUSE" /etc/*-release; then
+    if grep -Eqi "openSUSE" /etc/*-release; then
         OSNAME='opensuse'
-    elif grep -Eq "FreeBSD" /etc/*-release; then
+    elif grep -Eqi "FreeBSD" /etc/*-release; then
         OSNAME='freebsd'
-    elif grep -Eqi "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
+    elif grep -Eqi "CentOS" /etc/issue || grep -Eqi "CentOS" /etc/*-release; then
         OSNAME='rhel'
         yum install -y unzip
-    elif grep -Eqi "Fedora" /etc/issue || grep -Eq "Fedora" /etc/*-release; then
+    elif grep -Eqi "Fedora" /etc/issue || grep -Eqi "Fedora" /etc/*-release; then
         OSNAME='rhel'
         yum install -y unzip
-    elif grep -Eqi "Rocky" /etc/issue || grep -Eq "Rocky" /etc/*-release; then
+    elif grep -Eqi "Rocky" /etc/issue || grep -Eqi "Rocky" /etc/*-release; then
         OSNAME='rhel'
         yum install -y unzip
-    elif grep -Eqi "AlmaLinux" /etc/issue || grep -Eq "AlmaLinux" /etc/*-release; then
+    elif grep -Eqi "AlmaLinux" /etc/issue || grep -Eqi "AlmaLinux" /etc/*-release; then
         OSNAME='rhel'
         yum install -y unzip
-    elif grep -Eqi "Amazon Linux" /etc/issue || grep -Eq "Amazon Linux" /etc/*-release; then
+    elif grep -Eqi "Amazon Linux" /etc/issue || grep -Eqi "Amazon Linux" /etc/*-release; then
         OSNAME='rhel'
-    elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
+    elif grep -Eqi "Debian" /etc/issue || grep -Eqi "Debian" /etc/*-release; then
         OSNAME='debian'
         apt update -y
         apt install -y unzip
-    elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
+    elif grep -Eqi "Ubuntu" /etc/issue || grep -Eqi "Ubuntu" /etc/*-release; then
         OSNAME='debian'
         apt update -y
         apt install -y unzip
